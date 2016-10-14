@@ -1,0 +1,33 @@
+{
+    "name": "mozgbrasil/magento-iwd-opc",
+    "description": "IWD_Opc",
+    "version": "1.0.0",
+    "type": "magento-module",
+    "keywords": ["cerebrum", "mozg", "magento", "iwd", "opc"],
+    "homepage": "http://mozg.com.br",
+    "time": "2016-10-14 15:33:48",
+    "license": [
+        "proprietary"
+    ],
+    "authors": [
+        {
+            "name": "Mozg",
+            "email": "suporte@mozg.com.br",
+            "homepage": "http://mozg.com.br",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "suporte@mozg.com.br",
+        "issues": "https://github.com/mozgbrasil/magento-iwd-opc/issues",
+        "forum": "http://mozg.com.br/forums/view/1",
+        "wiki": "http://wiki.mozg.com.br",
+        "irc": "irc://irc.freenode.org/mozgbrasil",
+        "source": "https://github.com/mozgbrasil/magento-iwd-opc",
+        "docs": "https://github.com/mozgbrasil/magento-iwd-opc/wiki",
+        "rss": "https://mozg.com.br/feed.xml"
+    },
+    "require" : {
+        "mozgbrasil/magento-iwd-all": "*"
+    }
+}

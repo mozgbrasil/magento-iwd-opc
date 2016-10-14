@@ -1,0 +1,15 @@
+<?php if (Mage::getStoreConfig('opc/global/status')):?>
+    <?php if (Mage::getStoreConfig('payment/incontext/enable')):?>
+        <script>
+            var PayPalLightboxConfig = '<?php echo $this->getJsonConfig();?>';
+            <?php
+                $list = Mage::getSingleton('core/session')->getIdsButtons();
+                Mage::getSingleton('core/session')->unsIdsButtons();
+            ?>
+            <?php if (is_array($list) && count($list)>0):?>
+            var IDS = <?php echo json_encode($list);?>;
+            <?php endif;?>
+        </script>
+        <script type="text/javascript" src="//www.paypalobjects.com/api/checkout.js" async></script>
+    <?php endif;?>
+<?php endif;?>
