@@ -3,7 +3,7 @@
     "description": "IWD_Opc",
     "version": "1.0.0",
     "type": "magento-module",
-    "keywords": ["cerebrum", "mozg", "magento", "iwd", "opc"],
+    "keywords": ["cerebrum", "mozg", "magento", "checkout", "iwd", "opc"],
     "homepage": "http://mozg.com.br",
     "time": "2016-10-14 15:33:48",
     "license": [
