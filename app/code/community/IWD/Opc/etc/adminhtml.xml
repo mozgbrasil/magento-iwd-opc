@@ -6,13 +6,35 @@
                 <iwdall>
                     <children>
                         <opc>
-                            <title>One Page Checkout</title>
+                            <title>Checkout Suite</title>
                             <action>adminhtml/system_config/edit/section/opc</action>
                         </opc>
                     </children>
                 </iwdall>
             </children>
         </system>
+        <catalog translate="title" module="catalog">
+            <children>
+                <subscriptions_types translate="title" module="opc">
+                    <title>Subscriptions</title>
+                    <sort_order>1</sort_order>
+                    <children>
+                        <types>
+                            <title>Types</title>
+                            <action>adminhtml/iwd_opc_locked/types</action>
+                        </types>
+                        <products>
+                            <title>Products</title>
+                            <action>adminhtml/iwd_opc_locked/products</action>
+                        </products>
+                        <subscriptions>
+                            <title>Subscriptions</title>
+                            <action>adminhtml/iwd_opc_locked/subscriptions</action>
+                        </subscriptions>
+                    </children>
+                </subscriptions_types>
+            </children>
+        </catalog>
     </menu>
 	<acl>
         <resources>
@@ -23,7 +45,7 @@
 							<config>
 								<children>
 									<opc translate="title" module="opc">
-										<title>IWD One Page Checkout</title>
+										<title>Checkout Suite</title>
 										<sort_order>70</sort_order>
 									</opc>
 								</children>

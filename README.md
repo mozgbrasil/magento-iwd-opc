@@ -1,6 +1,8 @@
 ![valid XHTML][checkmark]
 [checkmark]: https://raw.githubusercontent.com/mozgbrasil/mozgbrasil.github.io/master/assets/images/logos/Red_star_32_32.png "MOZG"
-
+[psr4]: http://www.php-fig.org/psr/psr-4/
+[getcomposer]: https://getcomposer.org/
+[uninstall-mods]: https://getcomposer.org/doc/03-cli.md#remove
 
 # Mozg\IWD_Opc
 
@@ -26,9 +28,9 @@ Para obter o devido suporte entre em contato com a desenvolvedora do módulo
 
 ## Instalação - Atualização - Desinstalação - Desativação
 
-Este módulo destina-se a ser instalado usando o [Composer][getcomposer]
+Esta biblioteca destina-se a ser instalado usando o [Composer][getcomposer].
 
-Antes de executar os processos, [clique aqui][requerimentos] e leia os pré-requisitos e sugestões
+Autoloading compatível é [PSR-4][psr4]
 
 --
 

@@ -8,8 +8,101 @@
 		</iwdall>
 	</tabs>
 	<sections>
+		<carriers translate="label" module="shipping">
+			<groups>
+				<iwdstorepickup translate="label">
+					<label>IWD In-Store Pickup</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<active translate="label">
+							<label>Enabled</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</active>
+						<title translate="label">
+							<label>Title</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</title>
+						<minimum_order_amount translate="label">
+							<label>Minimum Order Amount</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-number validate-zero-or-greater</validate>
+							<sort_order>3</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</minimum_order_amount>
+						<specificerrmsg translate="label">
+							<label>Displayed Error Message</label>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>4</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</specificerrmsg>
+						<sallowspecific translate="label">
+							<label>Ship to Applicable Countries</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>5</sort_order>
+							<frontend_class>shipping-applicable-country</frontend_class>
+							<source_model>adminhtml/system_config_source_shipping_allspecificcountries</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</sallowspecific>
+						<specificcountry translate="label">
+							<label>Ship to Specific Countries</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>6</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<can_be_empty>1</can_be_empty>
+						</specificcountry>
+						<showmethod translate="label">
+							<label>Show Method if Not Applicable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>7</sort_order>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</showmethod>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>8</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</sort_order>
+						<stores>
+							<label>Stores</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>9</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</stores>
+					</fields>
+				</iwdstorepickup>
+			</groups>
+		</carriers>
 		<opc translate="label" module="contacts">
-			<label>One Page Checkout</label>
+			<label>Checkout Suite</label>
 			<tab>iwdall</tab>
 			<frontend_type>text</frontend_type>
 			<sort_order>219</sort_order>
@@ -440,7 +533,451 @@
                         </btnhovertextcolor>
                     </fields>
 				</design>
+				<opc_store_credit translate="label">
+					<label>Store Credit Options</label>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<sort_order>80</sort_order>
+					<expanded>1</expanded>
+					<fields>
+						<enabled translate="label">
+							<label>Enable Store Credit</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<backend_model>adminhtml/system_config_backend_cache</backend_model>
+							<sort_order>5</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</enabled>
+						<show_history translate="label">
+							<label>Show Store Credit History to Customers</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</show_history>
+						<auto_refund translate="label">
+							<label>Refund Store Credit Automatically</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</auto_refund>
+						<email_identity translate="label">
+							<label>Store Credit Update Email Sender</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_identity</source_model>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email_identity>
+						<email_template translate="label">
+							<label>Store Credit Update Email Template</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email_template>
+					</fields>
+				</opc_store_credit>
 
+				<gift_cards_settings>
+					<label>Gift Cards</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>90</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<opc_giftcard_general type="group" translate="label">
+							<label>General Settings</label>
+							<config_path>opc/opc_giftcard_general</config_path>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<expanded>1</expanded>
+							<fields>
+								<enable_gfaccount>
+									<label>Enable Gift Card Account</label>
+									<config_path>opc/giftcardaccount_general/enable_gfaccount</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_yesno</source_model>
+									<backend_model>adminhtml/system_config_backend_cache</backend_model>
+									<sort_order>1</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Enables settings to manage gift card accounts.</comment>
+								</enable_gfaccount>
+								<is_redeemable translate="label">
+									<label>Redeemable</label>
+									<config_path>opc/opc_giftcard_general/is_redeemable</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_yesno
+									</source_model>
+									<sort_order>5</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Gift Card can be redeemed for store credit.</comment>
+								</is_redeemable>
+								<lifetime translate="label comment">
+									<label>Expires After</label>
+									<config_path>opc/opc_giftcard_general/lifetime</config_path>
+									<frontend_type>text</frontend_type>
+									<sort_order>10</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>The number of days card is valid. If left blank, gift card will not expire.</comment>
+								</lifetime>
+								<allow_message translate="label">
+									<label>Allow Message</label>
+									<config_path>opc/opc_giftcard_general/allow_message</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_yesno</source_model>
+									<sort_order>15</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment>Give customer option to leave a message when purchasing gift card.</comment>
+								</allow_message>
+								<order_item_status translate="label">
+									<label>Generate Gift Card Account when Item is</label>
+									<config_path>opc/opc_giftcard_general/order_item_status</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>opc/giftcard_source_status</source_model>
+									<sort_order>25</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Determine when gift card account is created.</comment>
+								</order_item_status>
+							</fields>
+						</opc_giftcard_general>
+
+						<opc_giftcard_email type="group" translate="label">
+							<label>Notification Settings</label>
+							<config_path>opc/opc_giftcard_email</config_path>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<expanded>0</expanded>
+							<fields>
+								<identity translate="label">
+									<label>Notification Email Sender</label>
+									<config_path>opc/opc_giftcard_email/identity</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_identity</source_model>
+									<sort_order>6</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment>The store contact that appears as the sender of the gift card notification email. Email sent to customer after purchase.</comment>
+								</identity>
+								<template translate="label">
+									<label>Notification Email Template</label>
+									<config_path>opc/opc_giftcard_email/template</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>7</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment>Template for gift card notification email, sent to customer after purchase.</comment>
+								</template>
+
+								<identity_email translate="label">
+									<label>Gift Card Email Sender</label>
+									<config_path>opc/giftcardaccount_email/identity_email</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_identity</source_model>
+									<sort_order>1</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment>Email sent from gift card account manager when admin creates gift card in admin panel.</comment>
+								</identity_email>
+								<template_email translate="label">
+									<label>Gift Card Email Template</label>
+									<config_path>opc/giftcardaccount_email/template_email</config_path>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>2</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment>Template used when admin creates gift card in admin panel.</comment>
+								</template_email>
+
+							</fields>
+						</opc_giftcard_email>
+						<giftcardaccount_general type="group" translate="label">
+							<label>Advanced Settings</label>
+							<config_path>opc/giftcardaccount_general</config_path>
+							<sort_order>300</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<expanded>0</expanded>
+							<fields>
+								<code_length translate="label comment">
+									<label>Code Length</label>
+									<config_path>opc/giftcardaccount_general/code_length</config_path>
+									<frontend_type>text</frontend_type>
+									<backend_model>opc/giftcardaccount_system_config_backend_pool</backend_model>
+									<sort_order>2</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Length of the gift card code.</comment>
+								</code_length>
+								<code_format translate="label">
+									<label>Code Format</label>
+									<config_path>opc/giftcardaccount_general/code_format</config_path>
+									<frontend_type>select</frontend_type>
+									<backend_model>opc/giftcardaccount_system_config_backend_pool</backend_model>
+									<source_model>opc/giftcardaccount_source_format</source_model>
+									<sort_order>3</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Format of the gift card code.</comment>
+								</code_format>
+								<code_prefix translate="label">
+									<label>Code Prefix</label>
+									<config_path>opc/giftcardaccount_general/code_prefix</config_path>
+									<frontend_type>text</frontend_type>
+									<backend_model>opc/giftcardaccount_system_config_backend_pool</backend_model>
+									<sort_order>4</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Add characters to the beginning of gift card code.</comment>
+								</code_prefix>
+								<code_suffix translate="label">
+									<label>Code Suffix</label>
+									<config_path>opc/giftcardaccount_general/code_suffix</config_path>
+									<frontend_type>text</frontend_type>
+									<backend_model>opc/giftcardaccount_system_config_backend_pool</backend_model>
+									<sort_order>5</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Add characters to the end of gift card code.</comment>
+								</code_suffix>
+								<code_split translate="label comment">
+									<label>Dash Every X Characters</label>
+									<config_path>opc/giftcardaccount_general/code_split</config_path>
+									<frontend_type>text</frontend_type>
+									<backend_model>opc/giftcardaccount_system_config_backend_pool</backend_model>
+									<sort_order>6</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>The number of characters between each dash. If left blank, code will have no dashes.</comment>
+								</code_split>
+								<pool_size translate="label comment">
+									<label>New Pool Size</label>
+									<config_path>opc/giftcardaccount_general/pool_size</config_path>
+									<frontend_type>text</frontend_type>
+									<sort_order>7</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment>Gift cards are generated using a pool of characters. Determine the size of the code pool for when new gift cards are generated. </comment>
+								</pool_size>
+								<pool_threshold translate="label comment">
+									<label>Low Code Pool Threshold</label>
+									<config_path>opc/giftcardaccount_general/pool_threshold</config_path>
+									<frontend_type>text</frontend_type>
+									<sort_order>8</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>0</show_in_website>
+									<show_in_store>0</show_in_store>
+								</pool_threshold>
+							</fields>
+						</giftcardaccount_general>
+					</fields>
+				</gift_cards_settings>
+
+				<iwd_recurringpayments>
+					<label>Subscriptions and Recurring Payments</label>
+					<config_path>iwd_recurringpayments</config_path>
+					<frontend_type>text</frontend_type>
+					<sort_order>221</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>0</show_in_store>
+					<expanded>1</expanded>
+					<fields>
+						<iwd_recurringpayments_general type="group" translate="label">
+							<label>General Settings</label>
+							<config_path>iwd_recurringpayments/general</config_path>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<expanded>1</expanded>
+							<fields>
+								<!--<info>-->
+								<!--<label>Version</label>-->
+								<!--<frontend_type>text</frontend_type>-->
+								<!--<sort_order>0</sort_order>-->
+								<!--<show_in_default>1</show_in_default>-->
+								<!--<show_in_website>1</show_in_website>-->
+								<!--<show_in_store>0</show_in_store>-->
+								<!--<config_path>iwd_recurringpayments/general/info</config_path>-->
+								<!--<frontend_model>iwd_recurringpayments/system_config_form_field_version</frontend_model>-->
+								<!--</info>-->
+								<status>
+									<label>Enable Module?</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_yesno</source_model>
+									<sort_order>10</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>0</show_in_store>
+									<config_path>iwd_recurringpayments/general/status</config_path>
+									<validate>required-entry</validate>
+								</status>
+								<days_for_retry_payment>
+									<label>Automatically Retry Failed Transactions After X Days</label>
+									<frontend_type>text</frontend_type>
+									<sort_order>10</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>0</show_in_store>
+									<comment><![CDATA[Number of days until customer is charged again after failed payment]]></comment>
+									<config_path>iwd_recurringpayments/general/days_for_retry_payment</config_path>
+								</days_for_retry_payment>
+							</fields>
+						</iwd_recurringpayments_general>
+						<iwd_recurringpayments_email type="group" translate="label">
+							<label>Emails</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<config_path>iwd_recurringpayments/emails</config_path>
+							<expanded>1</expanded>
+							<fields>
+								<new_subscription translate="label">
+									<label>New Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/new_subscription</config_path>
+								</new_subscription>
+								<cancel_subscription translate="label">
+									<label>Cancel Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/cancel_subscription</config_path>
+								</cancel_subscription>
+								<update_subscription translate="label">
+									<label>Update Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/update_subscription</config_path>
+								</update_subscription>
+								<reorder_subscription translate="label">
+									<label>Reorder Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/reorder_subscription</config_path>
+								</reorder_subscription>
+								<trial_end_subscription translate="label">
+									<label>End Trial Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/trial_end_subscription</config_path>
+								</trial_end_subscription>
+								<next_payment_subscription translate="label">
+									<label>Next Payment Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/next_payment_subscription</config_path>
+								</next_payment_subscription>
+								<payment_failed_subscription translate="label">
+									<label>Payment Failed Subscription Email</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/payment_failed_subscription</config_path>
+								</payment_failed_subscription>
+								<header translate="label">
+									<label>Header for emails</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/header</config_path>
+								</header>
+								<footer translate="label">
+									<label>Footer for emails</label>
+									<frontend_type>select</frontend_type>
+									<source_model>adminhtml/system_config_source_email_template</source_model>
+									<sort_order>130</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+									<comment><![CDATA[]]></comment>
+									<config_path>iwd_recurringpayments/email/footer</config_path>
+								</footer>
+							</fields>
+						</iwd_recurringpayments_email>
+					</fields>
+				</iwd_recurringpayments>
 			</groups>
 
 		</opc>

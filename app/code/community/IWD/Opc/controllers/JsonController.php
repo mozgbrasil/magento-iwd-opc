@@ -641,6 +641,9 @@ class IWD_Opc_JsonController extends Mage_Core_Controller_Front_Action{
 						| Mage_Payment_Model_Method_Abstract::CHECK_ZERO_TOTAL;
 
 				}
+                if (isset($data['cc_number'])) {
+                    $data['cc_number'] = preg_replace('/\s/', '', $data['cc_number']);
+                }
 				$this->getOnepage()->getQuote()->getPayment()->importData($data);
 			}
 

@@ -1532,7 +1532,7 @@ IWD.OPC.Comment = {
                 $j_opc(this).next().removeClass('hidden');
             }
         });
-        $ji('#customer_comment').change(function () {
+        $j_opc('#customer_comment').change(function () {
             if (IWD.OPC.Checkout.config.comment !== "0")
                 IWD.OPC.saveCustomerComment();
         });

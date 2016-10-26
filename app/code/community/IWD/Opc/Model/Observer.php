@@ -7,7 +7,7 @@ class IWD_Opc_Model_Observer{
 		if (Mage::getSingleton('admin/session')->isLoggedIn()) {
 			if (!Mage::getConfig()->getModuleConfig('IWD_All')->is('active', 'true')){
 				if ($cache->load("iwd_opc")===false){
-					$message = 'Important: Please setup IWD_ALL in order to finish <strong>IWD One Page Checkout</strong> installation.<br />
+					$message = 'Important: Please setup IWD_ALL in order to finish <strong>Checkout Suite</strong> installation.<br />
 						Please download <a href="http://iwdextensions.com/media/modules/iwd_all.tgz" target="_blank">IWD_ALL</a> and setup it via Magento Connect.';
 				
 					Mage::getSingleton('adminhtml/session')->addNotice($message);

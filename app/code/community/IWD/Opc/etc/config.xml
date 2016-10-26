@@ -2,7 +2,7 @@
 <config>
 	<modules>
         <IWD_Opc>
-            <version>4.3.4</version>
+            <version>4.3.5</version>
         </IWD_Opc>
 	</modules>
 
@@ -27,7 +27,17 @@
             </updates>
         </layout>
 	</adminhtml>
-	
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <opc after="Mage_Adminhtml">IWD_Opc_Adminhtml</opc>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 	<frontend>
 		<routers>
             <opc>
