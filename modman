@@ -3,7 +3,7 @@ app/code/community/IWD/*                        app/code/community/IWD/
 app/design/adminhtml/default/default/layout/*   app/design/adminhtml/default/default/layout/
 app/design/adminhtml/default/default/template/iwd/* app/design/adminhtml/default/default/template/iwd/
 app/design/frontend/base/default/layout/*       app/design/frontend/base/default/layout/
-app/design/frontend/base/default/template/*     app/design/frontend/base/default/template/
+app/design/frontend/base/default/template/iwd/*     app/design/frontend/base/default/template/iwd/
 app/etc/modules/*                               app/etc/modules/
 skin/adminhtml/default/default/iwd/*            skin/adminhtml/default/default/iwd/
 skin/frontend/base/default/css/*                skin/frontend/base/default/css/
