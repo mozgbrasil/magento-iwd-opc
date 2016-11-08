@@ -8,7 +8,7 @@ app/etc/modules/*                               app/etc/modules/
 skin/adminhtml/default/default/iwd/*            skin/adminhtml/default/default/iwd/
 skin/frontend/base/default/css/*                skin/frontend/base/default/css/
 skin/frontend/base/default/js/*                 skin/frontend/base/default/js/
-js/iwd/opc/*                                    js/iwd/opc/
+js/iwd/opc/                                     js/iwd/opc/
 app/locale/de_DE/*                              app/locale/de_DE/
 app/locale/en_US/*                              app/locale/en_US/
 app/locale/nl_NL/*                              app/locale/nl_NL/
