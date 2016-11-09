@@ -91,5 +91,7 @@ Cada módulo tem a sua pasta no diretório /vendor/mozgbrasil/
 [![License](https://poser.pugx.org/mozgbrasil/magento-iwd-opc/license)](https://packagist.org/packages/mozgbrasil/magento-iwd-opc)
 [![Monthly Downloads](https://poser.pugx.org/mozgbrasil/magento-iwd-opc/d/monthly)](https://packagist.org/packages/mozgbrasil/magento-iwd-opc)
 [![Daily Downloads](https://poser.pugx.org/mozgbrasil/magento-iwd-opc/d/daily)](https://packagist.org/packages/mozgbrasil/magento-iwd-opc)
+[![Reference Status](https://www.versioneye.com/php/mozgbrasil:magento-iwd-opc/reference_badge.svg?style=flat-square)](https://www.versioneye.com/php/mozgbrasil:magento-iwd-opc/references)
+[![Dependency Status](https://www.versioneye.com/php/mozgbrasil:magento-iwd-opc/1.0.0/badge?style=flat-square)](https://www.versioneye.com/php/mozgbrasil:magento-iwd-opc/1.0.0)
 
 :cat2:
