@@ -8,7 +8,7 @@
 
 ## Sinopse
 
-Módulo de compra em 1 passo para Magento
+Checkout da compra em 1 passo para Magento
 
 ## Motivação
 
