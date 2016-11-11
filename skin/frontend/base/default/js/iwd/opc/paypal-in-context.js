@@ -46,12 +46,12 @@ window.paypalCheckoutReady = function() {
                 }
             }
             //return if click by button in add to cart form
-            if ($ji(e.target).closest('.add-to-cart').length>0){
+            if ($j_opc(e.target).closest('.add-to-cart').length>0){
                 return;
             }
 
 
-            var link = $ji(e.target).parent().attr('href');
+            var link = $j_opc(e.target).parent().attr('href');
             //click by a tag with link to express start
             if (typeof(link)!="undefined"){
                 //check type of paypal express
@@ -72,8 +72,8 @@ window.paypalCheckoutReady = function() {
 
 
             paypal.checkout.initXO();
-            $ji.support.cors = true;
-            $ji.ajax({
+            $j_opc.support.cors = true;
+            $j_opc.ajax({
                 url: urlConnect,
                 type: "GET",
                 async: true,

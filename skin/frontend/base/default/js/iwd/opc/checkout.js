@@ -87,8 +87,8 @@ IWD.OPC = {
                             }
 
                             paypal.checkout.initXO();
-                            $ji.support.cors = true;
-                            $ji.ajax({
+                            $j_opc.support.cors = true;
+                            $j_opc.ajax({
                                 url: urlConnect,
                                 type: "GET",
                                 async: true,
@@ -276,8 +276,8 @@ IWD.OPC = {
                 }
 
                 paypal.checkout.initXO();
-                $ji.support.cors = true;
-                $ji.ajax({
+                $j_opc.support.cors = true;
+                $j_opc.ajax({
                     url: urlConnect,
                     type: "GET",
                     async: true,
