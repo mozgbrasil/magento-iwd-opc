@@ -82,6 +82,18 @@ Cada módulo tem a sua pasta no diretório /vendor/mozgbrasil/
 
 --
 
+## Perguntas mais frequentes "FAQ"
+
+### Erro: Target already exists (set extra.magento-force to override)
+
+Na tentativa de instalar o módulo IWD_Opc via composer em um ambiente onde o mesmo já encontrava-se instalado é exibido o erro informando a existencia do módulo
+
+Você precisa ativar a opção "extra.magento-force" no arquivo composer.json
+
+Dessa forma será forçado a instalação do módulo, sobreescrevendo os arquivos
+
+Fonte: <a href="https://mage2.pro/t/topic/42">https://mage2.pro/t/topic/42</a>
+
 ## Badges
 
 [![Join the chat at https://gitter.im/mozgbrasil](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mozgbrasil/)
