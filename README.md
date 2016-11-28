@@ -32,13 +32,19 @@ Esta biblioteca destina-se a ser instalado usando o [Composer][getcomposer].
 
 Autoloading compatível é [PSR-4][psr4]
 
+--
+
 Certique se da existencia do arquivo composer.json na raiz do projeto Magento e que o mesmo tenha os trechos "minimum-stability", "prefer-stable", "repositories" e '"magento-root-dir":"./"', conforme https://gist.github.com/mozgbrasil/0c9bb8792ea6273ea24aed30b0fbcfba
 
 Caso não exista o arquivo composer.json na raiz do projeto Magento, efetue o download
 
 	wget https://gist.githubusercontent.com/mozgbrasil/0c9bb8792ea6273ea24aed30b0fbcfba/raw/b53c403620c111c43834fec9aa025809d1cb96b1/composer.json
 
+--
+
 Para qualquer atualização no Magento sempre mantenha o Compiler e o Cache desativado
+
+--
 
 ### Para instalar o módulo execute o comando a seguir no terminal do seu servidor
 
@@ -47,6 +53,8 @@ Para qualquer atualização no Magento sempre mantenha o Compiler e o Cache desa
 Você pode verificar se o módulo está instalado, indo ao backend em:
 
 	STORES -> Configuration -> ADVANCED/Advanced -> Disable Modules Output
+
+--
 
 ### Para atualizar o módulo execute o comando a seguir no terminal do seu servidor
 
@@ -58,15 +66,21 @@ Para checar a data do módulo execute o seguinte comando
 
 	grep -ri --include=*.json 'time": "' ./vendor/mozgbrasil
 
+--
+
 ### Para [desinstalar][uninstall-mods] o módulo execute o comando a seguir no terminal do seu servidor
 
 	composer remove mozgbrasil/magento-iwd-opc && composer clear-cache && composer update
+
+--
 
 ### Para desativar o módulo
 
 Renomeie a pasta do módulo
 
 Cada módulo tem a sua pasta no diretório /vendor/mozgbrasil/
+
+--
 
 ## Perguntas mais frequentes "FAQ"
 

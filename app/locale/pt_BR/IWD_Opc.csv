@@ -136,7 +136,7 @@
 "Payment Information","Informações de pagamento"
 "Payment Method","Método de pagamento"
 "Payment method is not defined","Método de pagamento não foi definido"
-"Place Order","Finalizar compra"
+"Place Order Now","Finalizar compra"
 "Please <a href=""%s"">continue shopping</a>.","<a href=""%s"">Continue comprando</a>."
 "Please agree to all Terms and Conditions before placing the order.","Por favor, concorde com todos os termos e condições antes de finalizar o pedido."
 "Please agree to all Terms and Conditions before placing the orders.","Por favor, concorde com todos os termos e condições antes de finalizar os pedidos."
@@ -235,8 +235,6 @@
 "Checkout","Checkout"
 "Shopping Cart is Empty","Shopping Cart is Empty"
 "Please <a href=""%s"">continue shopping</a>.","Please <a href=""%s"">continue shopping</a>."
-
-
 "Enter your coupon code:","Digite o código do cupom:"
 "Name & Address", "Nome e Endereço"
 "LOGIN HERE", "Acesse aqui"
@@ -246,6 +244,6 @@
 "Login to your Account", "Entre na sua conta"
 "Forgot Your Password?", "Esqueceu sua senha?"
 "Submit","Submeter"
-"Close","Perto"
+"Close","Fechar"
 "Cancel","Cancelar"
 "Review Your Order","Verificar a encomenda"
