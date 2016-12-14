@@ -84,6 +84,12 @@ Cada módulo tem a sua pasta no diretório /vendor/mozgbrasil/
 
 ## Perguntas mais frequentes "FAQ"
 
+### Permitir Checkout como Visitante
+
+Acesse no backend em:
+
+	Sistema -> Configurações -> Vendas -> Fechar Pedido -> Permitir Checkout como Visitante -> Informe Não
+
 ### Erro: Target already exists (set extra.magento-force to override)
 
 Na tentativa de instalar o módulo IWD_Opc via composer em um ambiente onde o mesmo já encontrava-se instalado é exibido o erro informando a existencia do módulo
