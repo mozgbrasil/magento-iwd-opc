@@ -1,11 +1,11 @@
 {
     "name": "mozgbrasil/magento-iwd-opc",
     "description": "IWD_Opc",
-    "version": "1.0.0",
+    "version": "4.3.6",
     "type": "magento-module",
     "keywords": ["cerebrum", "mozg", "magento", "checkout", "iwd", "opc"],
     "homepage": "http://mozg.com.br",
-    "time": "2017-01-27 10:16:07",
+    "time": "2017-01-27 10:29:01",
     "license": [
         "proprietary"
     ],
