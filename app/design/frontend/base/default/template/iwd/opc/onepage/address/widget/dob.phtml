@@ -46,7 +46,7 @@
          </div>'
     );
     ?>
-    <?php echo $this->escapeHtml($this->getSortedDateInputs()); ?>
+    <?php echo $this->getSortedDateInputs(); ?>
     <div class="dob-full" style="display:none;">
         <input type="hidden"
                id="<?php echo $this->escapeHtml($this->getFieldId('dob')); ?>"

@@ -198,6 +198,7 @@ class IWD_Opc_Block_Onepage_Gift_Message extends Mage_Checkout_Block_Onepage_Abs
 
     /**
      * Check availability of giftmessages for specified entity item
+     * @param object $item
      *
      * @return bool
      */

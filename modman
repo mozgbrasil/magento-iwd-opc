@@ -10,3 +10,4 @@ skin/adminhtml/default/default/js/iwd/*            skin/adminhtml/default/defaul
 skin/frontend/base/default/css/*                skin/frontend/base/default/css/
 skin/frontend/base/default/js/*                 skin/frontend/base/default/js/
 app/locale/en_US/*                              app/locale/en_US/
+app/locale/pt_BR/*                              app/locale/pt_BR/
