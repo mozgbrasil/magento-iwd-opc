@@ -1,332 +1,195 @@
 <?xml version="1.0"?>
 <layout>
-    <checkout_cart_index>
+	
+	<default>
+		<reference name="top.links">
+			<remove name="checkout_cart_link"/>
+			<block type="checkout/links" name="checkout_cart_link_custom"><action method="addCartLink" ></action></block>
+            <block type="opc/links" name="checkout_cart_link_custom"><action method="addCheckoutLink"></action></block>
+        </reference>
+		<!--  LOGIN WITH PAYPAL -->
         <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>css/iwd/opc/empty_cart.css</name>
-            </action>
+        	<action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>            
+            <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_css</type><name>css/iwd/opc/paypal.css</name><params/></action>
+            <!--  PAYPAL EXPRESS LIGHTBOX -->
+            <action method="addItem" ifconfig="payment/incontext/enable"><type>skin_js</type><name>js/iwd/opc/paypal-in-context.js</name></action>
         </reference>
-        <reference name="checkout.cart">
-            <action method="setEmptyTemplate">
-                <value>iwd/opc/cart/empty.phtml</value>
-            </action>
-            <action method="chooseTemplate"/>
-        </reference>
-    </checkout_cart_index>
-    <iwd_opc_index_index translate="label">
-        <remove name="left"/>
-        <remove name="right"/>
-        <update handle="payment_data_handle" /><!-- Authorize NET CIM-->
-        <reference name="root">
-            <action method="setTemplate">
-                <template>page/1column.phtml</template>
-            </action>
-        </reference>
-        <reference name="head">
-            <reference name="head">
-                <action method="addLinkRel">
-                    <rel>stylesheet</rel>
-                    <href>//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css</href>
-                </action>
-            </reference>
-            <reference name="head">
-                <action method="addLinkRel">
-                    <rel>stylesheet</rel>
-                    <href>//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,700italic,700</href>
-                </action>
-            </reference>
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>css/iwd/opc/onepage.css</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/helper.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/onepage.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/billing_address.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/shipping_address.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/shipping_method.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/payment_method.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/additional.js</name>
-            </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/login.js</name>
-            </action>
-        </reference>
-        <reference name="content">
-            <remove name="product.tooltip"/>
-            <block type="iwd_opc/onepage_wrapper" name="iwd_opc.onepage.wrapper"
-                   template="iwd/opc/onepage/wrapper.phtml">
-                <!--  PAYPAL BUTTON -->
-                <block type="iwd_opc/onepage_payment_paypal_express_button" name="iwd_opc.onepage.paypal_express" as="paypal_express"
-                       template="iwd/opc/onepage/payment/paypal/express/button.phtml">
-                </block>
-                <!--  PAYPALUK BUTTON -->
-                <block type="iwd_opc/onepage_payment_paypaluk_express_button" name="iwd_opc.onepage.paypaluk_express" as="paypaluk_express"
-                       template="iwd/opc/onepage/payment/paypal/express/button.phtml">
-                </block>
-                <!--  LOADER -->
-                <block type="core/template" name="iwd_opc.onepage.loader" as="loader"
-                       template="iwd/opc/onepage/loader.phtml"/>
-                <!--  LOGIN  -->
-                <block type="iwd_opc/onepage_login" name="iwd_opc.onepage.login" as="login"
-                       template="iwd/opc/onepage/login.phtml"/>
-                <!-- BILLING ADDRESS -->
-                <block type="iwd_opc/onepage_address_billing" name="iwd_opc.onepage.address.billing" as="billing_address"
-                       template="iwd/opc/onepage/address/billing.phtml"/>
-                <!-- SHIPPING ADDRESS -->
-                <block type="iwd_opc/onepage_address_shipping" name="iwd_opc.onepage.address.shipping" as="shipping_address"
-                       template="iwd/opc/onepage/address/shipping.phtml"/>
-                <!-- SHIPPING METHODS -->
-                <block type="iwd_opc/onepage_shipping_method" name="iwd_opc.onepage.shipping.method" as="shipping_method"
-                       template="iwd/opc/onepage/shipping/method.phtml"/>
-                <!-- GIFT MESSAGE -->
-                <block type="iwd_opc/onepage_gift_message" name="iwd_opc.onepage.gift.message" as="gift_message"
-                       template="iwd/opc/onepage/gift/message.phtml"/>
-                <!-- COMMENT -->
-                <block type="iwd_opc/onepage_comment" name="iwd_opc.onepage.comment" as="comment"
-                       template="iwd/opc/onepage/comment.phtml"/>
-                <!-- REVIEW -->
-                <block type="iwd_opc/onepage_review" name="iwd_opc.onepage.review" as="review"
-                       template="iwd/opc/onepage/review.phtml">
-                    <block type="iwd_opc/onepage_review_totals" name="iwd_opc.onepage.review.totals" as="totals"
-                           template="iwd/opc/onepage/review/totals.phtml"/>
-                    <action method="addItemRender">
-                        <type>default</type>
-                        <block>checkout/cart_item_renderer</block>
-                        <template>iwd/opc/onepage/review/items/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>grouped</type>
-                        <block>checkout/cart_item_renderer_grouped</block>
-                        <template>iwd/opc/onepage/review/items/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>configurable</type>
-                        <block>checkout/cart_item_renderer_configurable</block>
-                        <template>iwd/opc/onepage/review/items/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>bundle</type>
-                        <block>bundle/checkout_cart_item_renderer</block>
-                        <template>iwd/opc/onepage/review/items/default.phtml</template>
-                    </action>
-                    <action method="addItemRender">
-                        <type>downloadable</type>
-                        <block>downloadable/checkout_cart_item_renderer</block>
-                        <template>iwd/opc/onepage/review/items/downloadable.phtml</template>
-                    </action>
-                </block>
-                <!-- PAYMENTS FORM -->
-                <block type="iwd_opc/onepage_payment" name="iwd_opc.onepage.payment" as="payment"
-                       template="iwd/opc/onepage/payment.phtml">
-                    <!-- DISCOUNT FORM -->
-                    <block type="iwd_opc/onepage_payment_discount" name="iwd_opc.onepage.payment.discount" as="discount"
-                            template="iwd/opc/onepage/payment/discount.phtml"/>
-                    <!-- PAYMENT METHOD FORM -->
-                    <block type="iwd_opc/onepage_payment_method" name="iwd_opc.onepage.payment.method" as="payment_method"
-                           template="iwd/opc/onepage/payment/method.phtml">
-                        <action method="setMethodFormTemplate">
-                            <method>purchaseorder</method>
-                            <template>iwd/opc/onepage/payment/form/purchaseorder.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>banktransfer</method>
-                            <template>iwd/opc/onepage/payment/form/banktransfer.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>cashondelivery</method>
-                            <template>iwd/opc/onepage/payment/form/cashondelivery.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>cc</method>
-                            <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>ccsave</method>
-                            <template>iwd/opc/onepage/payment/form/ccsave.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>checkmo</method>
-                            <template>iwd/opc/onepage/payment/form/checkmo.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>verisign</method>
-                            <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>payflow_link</method>
-                            <template>iwd/opc/onepage/payment/form/payflow_link_info.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>paypal_direct</method>
-                            <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>payflow_advanced</method>
-                            <template>iwd/opc/onepage/payment/form/payflow_advanced_info.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>authorizenet_directpost</method>
-                            <template>iwd/opc/onepage/payment/form/authorizenet_directpost_form.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>iwd_authorizecim</method>
-                            <template>iwd/opc/onepage/payment/form/iwd_authorizecim_form.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>iwd_authorizecim_echeck</method>
-                            <template>iwd/opc/onepage/payment/form/iwd_authorizecim_echeck_form.phtml</template>
-                        </action>
-                        <action method="setMethodFormTemplate">
-                            <method>stripe</method>
-                            <template>iwd/opc/onepage/payment/form/iwd_stripe_form.phtml</template>
-                        </action>
-                    </block>
-                </block>
-                <!-- AGREEMENTS -->
-                <block type="iwd_opc/onepage_agreements" name="iwd_opc.onepage.agreements" as="agreements"
-                       template="iwd/opc/onepage/agreements.phtml"/>
-                <!-- NEWSLETTER -->
-                <block type="iwd_opc/onepage_subscribe" name="iwd_opc.onepage.subscribe" as="subscribe"
-                       template="iwd/opc/onepage/subscribe.phtml"/>
-            </block>
-        </reference>
+
         <reference name="before_body_end">
-            <!--  POPUP -->
-            <block type="core/template" name="iwd_opc.onepage.popup" as="popup"
-                   template="iwd/opc/onepage/popup.phtml"/>
-        </reference>
-    </iwd_opc_index_index>
-    <!-- IWD OPC AJAX BLOCKS -->
-    <iwd_opc_oneopage_shipping_method_ajax>
-        <remove name="right"/>
-        <remove name="left"/>
-        <!-- SHIPPING METHODS -->
-        <block type="iwd_opc/onepage_shipping_method" name="iwd_opc.onepage.shipping.method" as="shipping_method"
-               template="iwd/opc/onepage/shipping/method.phtml"/>
-    </iwd_opc_oneopage_shipping_method_ajax>
-    <iwd_opc_onepage_review_ajax>
-        <remove name="right"/>
-        <remove name="left"/>
-        <block type="iwd_opc/onepage_review" name="iwd_opc.onepage.review" as="review"
-               template="iwd/opc/onepage/review.phtml">
-            <block type="iwd_opc/onepage_review_totals" name="iwd_opc.onepage.review.totals" as="totals"
-                   template="iwd/opc/onepage/review/totals.phtml"/>
-            <action method="addItemRender">
-                <type>default</type>
-                <block>checkout/cart_item_renderer</block>
-                <template>iwd/opc/onepage/review/items/default.phtml</template>
-            </action>
-            <action method="addItemRender">
-                <type>grouped</type>
-                <block>checkout/cart_item_renderer_grouped</block>
-                <template>iwd/opc/onepage/review/items/default.phtml</template>
-            </action>
-            <action method="addItemRender">
-                <type>configurable</type>
-                <block>checkout/cart_item_renderer_configurable</block>
-                <template>iwd/opc/onepage/review/items/default.phtml</template>
-            </action>
-            <action method="addItemRender">
-                <type>bundle</type>
-                <block>bundle/checkout_cart_item_renderer</block>
-                <template>iwd/opc/onepage/review/items/default.phtml</template>
-            </action>
-            <action method="addItemRender">
-                <type>downloadable</type>
-                <block>downloadable/checkout_cart_item_renderer</block>
-                <template>iwd/opc/onepage/review/items/downloadable.phtml</template>
-            </action>
-        </block>
-    </iwd_opc_onepage_review_ajax>
-    <iwd_opc_onepage_payment_ajax>
-        <remove name="right"/>
-        <remove name="left"/>
-        <block type="iwd_opc/onepage_payment" name="iwd_opc.onepage.payment" as="payment"
-               template="iwd/opc/onepage/payment.phtml">
-            <!-- DISCOUNT FORM -->
-            <block type="iwd_opc/onepage_payment_discount" name="iwd_opc.onepage.payment.discount" as="discount"
-                   template="iwd/opc/onepage/payment/discount.phtml"/>
-            <block type="iwd_opc/onepage_payment_method" name="iwd_opc.onepage.payment.method" as="payment_method"
-                   template="iwd/opc/onepage/payment/method.phtml">
-                <action method="setMethodFormTemplate">
-                    <method>purchaseorder</method>
-                    <template>iwd/opc/onepage/payment/form/purchaseorder.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>banktransfer</method>
-                    <template>iwd/opc/onepage/payment/form/banktransfer.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>cashondelivery</method>
-                    <template>iwd/opc/onepage/payment/form/cashondelivery.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>cc</method>
-                    <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>ccsave</method>
-                    <template>iwd/opc/onepage/payment/form/ccsave.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>checkmo</method>
-                    <template>iwd/opc/onepage/payment/form/checkmo.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>verisign</method>
-                    <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>payflow_link</method>
-                    <template>iwd/opc/onepage/payment/form/payflow_link_info.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>paypal_direct</method>
-                    <template>iwd/opc/onepage/payment/form/cc.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>payflow_advanced</method>
-                    <template>iwd/opc/onepage/payment/form/payflow_advanced_info.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>authorizenet_directpost</method>
-                    <template>iwd/opc/onepage/payment/form/authorizenet_directpost_form.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>iwd_authorizecim</method>
-                    <template>iwd/opc/onepage/payment/form/iwd_authorizecim_form.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>iwd_authorizecim_echeck</method>
-                    <template>iwd/opc/onepage/payment/form/iwd_authorizecim_echeck_form.phtml</template>
-                </action>
-                <action method="setMethodFormTemplate">
-                    <method>stripe</method>
-                    <template>iwd/opc/onepage/payment/form/iwd_stripe_form.phtml</template>
-                </action>
+            <block type="opc/lipp" name="opc.lipp.js" as="">
+                <action method="setTemplate"><template>opc/lipp-js.phtml</template></action>
             </block>
-        </block>
-    </iwd_opc_onepage_payment_ajax>
+        </reference>
+	</default>
+	
+	<opc_index_index translate="label">
+		<label>Onepage Checkout</label>
+		        
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        
+        <reference name="head">		
+        	<action method="addItem"><type>skin_js</type><name>js/iwd/opc/checkout.js</name></action>
+        	<action method="addItem"><type>skin_js</type><name>js/iwd/opc/extend.js</name></action>
+        	<action method="addJs"><file>mage/directpost.js</file></action>
+        	<action method="addJs"><script>mage/centinel.js</script></action>
+			<action method="addItem"><type>skin_js</type><name>js/opcheckout.js</name></action>
+			<!--<action method="addItem" ifconfig="opc/paypal/status"><type>skin_js</type><name>js/iwd/opc/lipp.js</name></action>-->
+            <action method="addCss"><stylesheet>css/iwd/opc/opc.css</stylesheet></action>
+            <!--<action method="addJs" ifconfig="payment/braintree/active"><file>braintree/braintree-1.3.4.js</file></action>-->
+            <!--<action method="addCss" ifconfig="payment/braintree/active"><stylesheet>braintree/css/braintree.css</stylesheet></action>-->
+		</reference>
+        
+        <reference name="content">        	
+			<block type="opc/wrapper" name="es.checkout.container" template="opc/wrapper.phtml">
+			
+					 <block type="page/html_wrapper" name="paypal.button" translate="label">
+		                <label>PayPal Express Checkout Shortcut Wrapper</label>
+		                <block type="paypal/express_shortcut" name="product.info.addtocart.paypal" template="opc/paypal/express/shortcut.phtml">
+		                    <!-- action method="setIsInCatalogProduct"><value>1</value></action -->
+		                </block>
+		            </block>
+			
+			
+					<!--  LOGIN FORM  -->
+					<block type="opc/onepage_login" name="checkout.onepage.login" as="login" template="opc/onepage/login.phtml">
+						<block type="customer/account_forgotpassword" name="forgotPassword" template="opc/customer/form/forgotpassword.phtml"/>	
+					</block>
+				 	<!-- BILLING FORM -->
+                    <block type="opc/onepage_billing" name="checkout.onepage.billing" as="billing" template="opc/onepage/billing.phtml"/>
+
+                    <!-- SHIPPING FORM -->
+                    <block type="opc/onepage_shipping" name="checkout.onepage.shipping" as="shipping" template="opc/onepage/shipping.phtml"/>
+                    
+                    <!-- COUPON FORM -->
+                    <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="opc/onepage/coupon.phtml"/>
+                    
+                    <!-- COMMENT FORM -->
+                    <block type="opc/onepage_comment" name="checkout.order.comment" as="customer.comment"/>
+                    
+                    <!-- SHIPPING METHODS FORM -->
+                    <block type="checkout/onepage_shipping_method" name="checkout.onepage.shipping_method" as="shipping_method" template="opc/onepage/shipping_method.phtml">
+                    	<!-- shipper hq's template is replaced here, if is enabled -->
+                        <block type="opc/onepage_shipping_method_available" name="checkout.onepage.shipping_method.available" as="available" template="checkout/onepage/shipping_method/available.phtml"/>
+                        <!--<block type="shipperhq_splitrates/checkout_onepage_shipping_method_available" name="checkout.onepage.shipping_method.available"-->
+                               <!--as="available" template="shipperhq/checkout/onepage/shipping_method/available.phtml"/>-->
+                    	<block type="checkout/onepage_shipping_method_additional" name="checkout.onepage.shipping_method.additional" as="additional" template="checkout/onepage/shipping_method/additional.phtml"/>
+                	</block>
+                	
+                	<!-- PAYMENTS METHOD FORM -->
+                	<block type="checkout/onepage_payment" name="checkout.onepage.payment" as="payment" template="opc/onepage/payment.phtml">
+	                    <block type="checkout/onepage_payment_methods" name="checkout.payment.methods" as="methods" template="checkout/onepage/payment/methods.phtml">
+	                        <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+	                    </block>
+                	</block>
+                	
+                	<block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="opc/onepage/agreements.phtml"/>
+					<block type="opc/onepage_subscribed" template="opc/onepage/review/subscribed.phtml" name="opc.newsletters" /> 
+                    
+			</block>
+        </reference>
+        
+        <!--  PAYPAL EXPRESS LIGHTBOX -->
+        <reference name="before_body_end">
+			<!--<block type="opc/lipp" name="opc.lipp.js" as="">-->
+				<!--<action method="setTemplate" ifconfig="opc/paypal/status"><template>opc/lipp-js.phtml</template></action>-->
+			<!--</block>-->
+			<!--<block type="opc/braintree_datajs" name="braintree_payments_data_js">-->
+				<!--<action method="setTemplate" ifconfig="payment/braintree/active"><template>braintree/data_js.phtml</template></action>-->
+			<!--</block>-->
+            <!--<block type="opc/braintree_form" name="payment.form.braintree">-->
+            	<!--<action method="setTemplate" ifconfig="payment/braintree/active"><template>braintree/review_js.phtml</template></action>-->
+                <!--<action method="setMethodInfo"></action>-->
+            <!--</block>-->
+		</reference>
+	</opc_index_index>		
+	
+	<checkout_onepage_review>
+		<reference name="checkout.onepage.review.button">
+			<action method="setTemplate" ifconfig="opc/global/status"><template>opc/onepage/review/button.phtml</template></action>
+		</reference>
+		<reference name="checkout.onepage.agreements">
+			<action method="setTemplate" ifconfig="opc/global/status"><template>opc/onepage/agreements.phtml</template></action>
+		</reference>		
+	</checkout_onepage_review>
+	
+	<!--  3D SECURE (CENTINEL) -->
+	<opc_json_savepayment>
+        <reference name="checkout.onepage.review.info.items.before">
+            <block type="centinel/authentication" name="centinel.frame" template="centinel/authentication.phtml">
+                <action method="addRelatedBlock"><blockId>checkout-review-submit</blockId></action>
+                <action method="addRelatedBlock"><blockId>checkout-review-table-wrapper</blockId></action>
+                <action method="setAuthenticationStartMode"><mode>instant</mode></action>
+            </block>
+        </reference>
+    </opc_json_savepayment>
+    
+    <!--  3D SECURE (CENTINEL) - COMPLETE-->
+    <centinel_index_authenticationcomplete>
+    	<reference name="root">
+    		<action method="setTemplate"><template>opc/centinel/authentication/complete.phtml</template></action>
+    	</reference>
+    </centinel_index_authenticationcomplete>
+    
+    
+    <!--  PAYPAL EXPRESS LIGHTBOX -->
+	<!--<checkout_cart_index>-->
+	 	<!--<reference name="head">					-->
+			<!--<action method="addItem" ifconfig="opc/paypal/status"><type>skin_js</type><name>js/iwd/opc/lipp.js</name></action>    		-->
+		<!--</reference>-->
+		<!--<reference name="before_body_end">-->
+			<!--<block type="opc/lipp" name="opc.lipp.js" as="">-->
+				<!--<action method="setTemplate" ifconfig="opc/paypal/status"><template>opc/lipp-js.phtml</template></action>-->
+			<!--</block>-->
+		<!--</reference>-->
+	<!--</checkout_cart_index>-->
+	
+	
+	<!--  LOGIN WITH PAYPAL -->
+	<customer_logged_out>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="opc" ifconfig="opc/paypallogin/status"><label></label><url helper="opc/paypal/getLoginUrl"/><title>Log In With Paypal</title><prepare/><urlParams/><position>100</position><liParams/><aParams><id>topPayPalIn</id><class>paypal-auth</class></aParams></action>
+        </reference>
+    </customer_logged_out>
+    
+    <customer_account_index>
+        <reference name="customer_account_dashboard_info">
+            <block type="opc/customer_account_dashboard_info" name="customer_account_dashboard_info_paypal" as="paypalauth_dashboard" template="opc/customer/account/dashboard/info.phtml"/>
+        </reference>
+    </customer_account_index>
+
+    <customer_account_login>
+    	<reference name="head">           
+            <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>    	
+        </reference>
+        <reference name="customer_form_login">
+            <action method="setTemplate"><template>opc/customer/form/login.phtml</template></action>
+            <block type="opc/paypal_login" name="paypalauth.login" template="opc/paypal/paypal_login.phtml" />
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+            <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+        </reference>
+    </customer_account_login>
+
+    <customer_account_create>
+    	<reference name="head">            
+            <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>
+        </reference>
+        <reference name="customer_form_register">
+            <action method="setTemplate"><template>opc/customer/form/register.phtml</template></action>
+            <block type="opc/paypal_login" name="paypalauth.register" template="opc/paypal/paypal_register.phtml" />
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+            <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+        </reference>
+    </customer_account_create>
+
+   <opc_paypal_asklink>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+         <reference name="content">
+             <block type="opc/customer_account_asklink" name="opc.paypal.auth" template="opc/customer/account/asklink.phtml"/>
+         </reference>
+    </opc_paypal_asklink>
+
 </layout>

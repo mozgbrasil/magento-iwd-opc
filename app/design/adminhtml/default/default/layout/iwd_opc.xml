@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
+    <adminhtml_system_config_edit>
+        <update handle="iwd_free_opc_locked_handler"/>
+        <reference name="head">
+            <action method="addJs"><file>iwd/opc/colorpicker/jscolor.js</file></action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="iwd.opc.jsinit" template="iwd/opc/jsinit.phtml"/>
+        </reference>
+    </adminhtml_system_config_edit>
     <iwd_free_opc_locked_handler>
         <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>css/iwd/opc/locked.css</name>
+            <action method="addCss">
+                <name>iwd/opc/admin.css</name>
             </action>
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/iwd/opc/locked.js</name>
+            <action method="addJs">
+                <name>iwd/opc/locked.js</name>
             </action>
             <action method="addLinkRel">
                 <rel>stylesheet</rel>
@@ -34,7 +41,5 @@
             <block type="core/template" template="iwd/opc/locked_subscriptions.phtml"/>
         </reference>
     </adminhtml_iwd_opc_locked_subscriptions>
-    <adminhtml_system_config_edit>
-        <update handle="iwd_free_opc_locked_handler"/>
-    </adminhtml_system_config_edit>
+
 </layout>
