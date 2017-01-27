@@ -1,0 +1,14 @@
+<?php
+/**
+ * @var $this Mage_Payment_Block_Form_Purchaseorder
+ */
+?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="text"
+           id="po_number"
+           name="payment[po_number]"
+           title="<?php echo $this->escapeHtml($this->__('Purchase Order Number')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Purchase Order Number')); ?>"
+           class="iwd_opc_field iwd_opc_input required-entry"
+           value="<?php echo $this->escapeHtml($this->getInfoData('po_number')); ?>"/>
+</div>

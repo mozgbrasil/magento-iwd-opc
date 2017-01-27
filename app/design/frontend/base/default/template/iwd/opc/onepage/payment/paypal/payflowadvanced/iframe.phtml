@@ -1,0 +1,12 @@
+<?php
+/** @var $this Mage_Paypal_Block_Payflow_Advanced_Iframe */
+?>
+<iframe id="payflow-advanced-iframe" style="display:none;" scrolling="auto" frameborder="0"
+        src="<?php echo $this->escapeHtml($this->getFrameActionUrl()); ?>" height="610" width="490px"></iframe>
+<script type="text/javascript">
+    //<![CDATA[
+    $('payflow-advanced-iframe').observe('load', function () {
+        $('payflow-advanced-iframe').show();
+    });
+    //]]>
+</script>

@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Widget_Dob
+ */
+?>
+<div class="iwd_opc_universal_wrapper iwd_opc_customer_dob">
+    <?php
+    $this->setDateInput(
+        'd',
+        '<div class="iwd_opc_customer_dob_field dob-day">
+             <input 
+                 type="text" id="' . $this->escapeHtml($this->getFieldId('day')) . '" 
+                 name="' . $this->escapeHtml($this->getFieldName('day')) . '" 
+                 value="' . $this->escapeHtml($this->getDay()) . '" 
+                 placeholder="' . $this->escapeHtml($this->__('Day')) . '" 
+                 title="' . $this->escapeHtml($this->__('Date of birthday')) . '" 
+                 class="iwd_opc_field iwd_opc_input validate-custom" ' . $this->getFieldParams() . ' />
+         </div>'
+    );
+
+    $this->setDateInput(
+        'm',
+        '<div class="iwd_opc_customer_dob_field dob-month">
+             <input 
+                 type="text" 
+                 id="' . $this->escapeHtml($this->getFieldId('month')) . '" 
+                 name="' . $this->escapeHtml($this->getFieldName('month')) . '" 
+                 value="' . $this->escapeHtml($this->getMonth()) . '" 
+                 placeholder="' . $this->escapeHtml($this->__('Mon')) . '" 
+                 title="' . $this->escapeHtml($this->__('Date of birthday')) . '" 
+                 class="iwd_opc_field iwd_opc_input validate-custom" ' . $this->getFieldParams() . ' />
+         </div>'
+    );
+
+    $this->setDateInput(
+        'y',
+        '<div class="iwd_opc_customer_dob_field dob-year">
+             <input 
+                 type="text" 
+                 id="' . $this->escapeHtml($this->getFieldId('year')) . '" 
+                 name="' . $this->escapeHtml($this->getFieldName('year')) . '" 
+                 value="' . $this->escapeHtml($this->getYear()) . '" 
+                 placeholder="' . $this->escapeHtml($this->__('Year')) . '" 
+                 title="' . $this->escapeHtml($this->__('Date of birthday')) . '" 
+                 class="iwd_opc_field iwd_opc_input validate-custom" ' . $this->getFieldParams() . ' />
+         </div>'
+    );
+    ?>
+    <?php echo $this->escapeHtml($this->getSortedDateInputs()); ?>
+    <div class="dob-full" style="display:none;">
+        <input type="hidden"
+               id="<?php echo $this->escapeHtml($this->getFieldId('dob')); ?>"
+               name="<?php echo $this->escapeHtml($this->getFieldName('dob')); ?>"/>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+        var customer_dob = new Varien.DOB(
+            '.iwd_opc_customer_dob',
+            <?php echo $this->isRequired() ? 'true' : 'false' ?>,
+            '<?php echo $this->getDateFormat(); ?>');
+        //]]>
+    </script>
+</div>
+
+

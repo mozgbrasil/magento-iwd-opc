@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Review_Renderer_Subtotal
+ */
+?>
+    <div class="iwd_opc_top_review_total">
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->__('Subtotal')) . ':'; ?>
+        </div>
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->helper('iwd_opc')->formatPrice($this->getSubtotalPrice(), false)); ?>
+        </div>
+    </div>
+<?php if ($this->displayBoth()) { ?>
+    <div class="iwd_opc_top_review_total iwd_opc_top_review_total_tax">
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->__('Subtotal + Tax')) . ':'; ?>
+        </div>
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml(
+                $this->helper('iwd_opc')->formatPrice($this->getTotal()->getValueInclTax(), false)
+            ); ?>
+        </div>
+    </div>
+<?php } ?>

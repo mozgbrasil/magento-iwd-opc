@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Review
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$opcHelper = $this->helper('iwd_opc');
+?>
+<div id="iwd_opc_top_review_head">
+    <?php echo $this->escapeHtml($opcHelper->formatPrice($this->getGrandTotalPrice(), false)); ?>
+</div>
+<div id="iwd_opc_top_review_items_totals">
+    <div id="iwd_opc_top_review_items">
+        <?php foreach ($this->getItems() as $item) { ?>
+            <?php echo $this->getItemHtml($item); ?>
+        <?php } ?>
+    </div>
+    <div id="iwd_opc_top_review_totals">
+        <?php echo $this->getChildHtml('totals'); ?>
+    </div>
+</div>

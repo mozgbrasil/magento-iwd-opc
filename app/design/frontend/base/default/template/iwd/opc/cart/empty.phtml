@@ -1,0 +1,46 @@
+<?php
+/**
+ * @var $this Mage_Checkout_Block_Cart
+ */
+?>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<?php echo $this->getChildHtml('checkout_cart_empty_widget'); ?>
+<?php echo $this->getChildHtml('shopping.cart.table.after'); ?>
+<div class="iwd_empty_cart_wrapper">
+    <div class="iwd_opc_alternative_column iwd_empty_page_column">
+        <div class="iwd_empty_page_title">
+            <?php echo $this->escapeHtml($this->__('Your Cart Is Empty')); ?>
+        </div>
+        <div class="iwd_opc_section_delimiter"></div>
+        <div class="iwd_opc_universal_wrapper iwd_empty_cart_info">
+            <?php echo $this->escapeHtml($this->__('Looks like there\'s nothing here yet.')); ?>
+        </div>
+        <div class="iwd_opc_universal_wrapper">
+            <button type="button"
+                    onclick="window.location='<?php echo $this->jsQuoteEscape($this->getUrl()); ?>'"
+                    class="iwd_opc_button active"
+                    title="<?php echo $this->escapeHtml($this->__('Continue Shopping')); ?>">
+                <?php echo $this->escapeHtml($this->__('Continue Shopping')); ?>
+            </button>
+        </div>
+        <?php if ($this->getCustomer()->getId()) { ?>
+            <div class="iwd_opc_universal_wrapper">
+                <button type="button"
+                        onclick="window.location='<?php echo $this->jsQuoteEscape(
+                            $this->getUrl('customer/account')
+                        ); ?>'"
+                        class="iwd_opc_button"
+                        title="<?php echo $this->escapeHtml($this->__('View Account')); ?>">
+                    <?php echo $this->escapeHtml($this->__('View Account')); ?>
+                </button>
+            </div>
+        <?php } ?>
+        <div class="iwd_empty_cart_powered_by">
+            <a title="<?php echo $this->escapeHtml($this->__('Checkout Suite by IWD Agency')); ?>"
+               target="_blank"
+               href="https://iwdagency.com/">
+                <?php echo $this->escapeHtml($this->__('Checkout Suite by IWD Agency')); ?>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,234 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Wrapper
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$opcHelper = $this->getOpcHelper();
+$showLoginButton = !$this->isCustomerLoggedIn() && $opcHelper->isShowLoginButton();
+?>
+<div class="iwd_opc_clear"></div>
+<div class="iwd_opc_wrapper">
+    <div class="iwd_opc_alternative_wrapper
+            <?php /*if ($this->isVirtual()) { ?>
+            iwd_opc_two_column_wrapper
+            <?php }*/ ?>
+    ">
+        <script type="text/javascript">
+            var iwdOpcConfig = '<?php echo $this->jsQuoteEscape($this->getJsonConfig()); ?>';
+            Validation.defaultOptions.addClassNameToContainer = true;
+            Validation.defaultOptions.containerClassName = '.iwd_opc_universal_wrapper';
+        </script>
+        <?php if ($showLoginButton) { ?>
+            <div class="iwd_opc_top">
+                <div class="iwd_opc_top_buttons" data-has-login="true">
+                    <?php echo $this->getChildHtml('paypal_express'); ?>
+                    <?php echo $this->getChildHtml('paypaluk_express'); ?>
+                </div>
+            </div>
+        <?php } ?>
+        <div class="iwd_opc_top">
+            <?php if ($showLoginButton) { ?>
+                <div class="iwd_opc_top_buttons">
+                    <button type="button"
+                            id="iwd_opc_top_login_button"
+                            class="iwd_opc_button active"
+                            title="<?php echo $this->escapeHtml($this->__('Login')) ?>">
+                        <?php echo $this->escapeHtml($this->__('Login')) ?>
+                    </button>
+                </div>
+            <?php } else { ?>
+                <div class="iwd_opc_top_buttons" data-has-login="false">
+                    <?php echo $this->getChildHtml('paypal_express'); ?>
+                    <?php echo $this->getChildHtml('paypaluk_express'); ?>
+                </div>
+            <?php } ?>
+            <div id="iwd_opc_top_review" tabindex="-1">
+                <?php echo $this->getChildHtml('review'); ?>
+            </div>
+        </div>
+        <div class="iwd_opc_clear"></div>
+        <div class="iwd_opc_column" id="iwd_opc_address_column">
+            <div class="iwd_opc_alternative_column">
+                <div class="iwd_opc_universal_wrapper iwd_opc_column_status">
+                    <div class="iwd_opc_column_alternative_status">
+                        1
+                    </div>
+                </div>
+                <div class="iwd_opc_column_content" tabindex="-1">
+                    <div id="iwd_opc_billing_address">
+                        <form class="iwd_opc_form" id="iwd_opc_billing_form">
+                            <?php if (!$this->isCustomerLoggedIn()) { ?>
+                                <div id="iwd_opc_login">
+                                    <?php echo $this->getChildHtml('login'); ?>
+                                    <?php echo $this->getChildHtml('loader'); ?>
+                                </div>
+                                <div class="iwd_opc_section_delimiter"></div>
+                            <?php } ?>
+                            <div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message"
+                                 style="display:none;">
+
+                            </div>
+                            <?php echo $this->getChildHtml('billing_address'); ?>
+                        </form>
+                        <?php echo $this->getChildHtml('loader'); ?>
+                    </div>
+                    <script type="text/javascript">
+                        var iwdOpcBillingAddressForm = new VarienForm('iwd_opc_billing_form');
+                        iwdOpcBillingAddressForm.validator.options = {
+                            onSubmit: false,
+                            stopOnFirst: false,
+                            immediate: false,
+                            focusOnError: false,
+                            useTitles: false,
+                            onFormValidate: function (result, form) {
+                            },
+                            onElementValidate: function (result, elm) {
+                            }
+                        };
+                    </script>
+                    <?php if (!$this->isVirtual()) {
+                        ?>
+                        <div id="iwd_opc_shipping_address"
+                            <?php if (!$this->isShowShippingForm()) { ?>
+                                style="display:none;"
+                            <?php } ?>
+                        >
+                            <div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message"
+                                 style="display:none;">
+
+                            </div>
+                            <form class="iwd_opc_form" id="iwd_opc_shipping_form">
+                                <?php echo $this->getChildHtml('shipping_address'); ?>
+                            </form>
+                            <?php echo $this->getChildHtml('loader'); ?>
+                        </div>
+                        <script type="text/javascript">
+                            var iwdOpcShippingAddressForm = new VarienForm('iwd_opc_shipping_form');
+                            iwdOpcShippingAddressForm.validator.options = {
+                                onSubmit: false,
+                                stopOnFirst: false,
+                                immediate: false,
+                                focusOnError: false,
+                                useTitles: false,
+                                onFormValidate: function (result, form) {
+                                },
+                                onElementValidate: function (result, elm) {
+                                }
+                            };
+                        </script>
+                    <?php }
+                    /*else { ?>
+                    <?php if ($opcHelper->isShowCommentField()) { ?>
+                        <div class="iwd_opc_section_delimiter"></div>
+                        <div id="iwd_opc_comment">
+                            <?php echo $this->getChildHtml('comment'); ?>
+                            <?php echo $this->getChildHtml('loader'); ?>
+                        </div>
+                    <?php } ?>
+                    <?php } */ ?>
+                </div>
+            </div>
+        </div>
+        <!--        --><?php //if (!$this->isVirtual()) { ?>
+        <div class="iwd_opc_column" id="iwd_opc_shipping_column">
+            <div class="iwd_opc_alternative_column">
+                <div class="iwd_opc_universal_wrapper iwd_opc_column_status">
+                    <div class="iwd_opc_column_alternative_status">
+                        2
+                    </div>
+                </div>
+                <div class="iwd_opc_column_content" tabindex="-1">
+                    <div id="iwd_opc_shipping_method">
+                        <div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message"
+                             style="display:none;">
+
+                        </div>
+                        <?php echo $this->getChildHtml('shipping_method'); ?>
+                        <?php if (!$this->isVirtual()) { ?>
+                            <?php echo $this->getChildHtml('loader'); ?>
+                        <?php } ?>
+                    </div>
+                    <?php if ($opcHelper->isShowCommentField()
+                        || ($opcHelper->isShowGiftMessage() && !$this->isVirtual())
+                    ) { ?>
+                        <div class="iwd_opc_section_delimiter"></div>
+                    <?php } ?>
+                    <?php if ($opcHelper->isShowCommentField()) { ?>
+                        <div id="iwd_opc_comment">
+                            <?php echo $this->getChildHtml('comment'); ?>
+                            <?php echo $this->getChildHtml('loader'); ?>
+                        </div>
+                    <?php } ?>
+                    <?php if ($opcHelper->isShowGiftMessage() && !$this->isVirtual()) { ?>
+                        <div id="iwd_opc_gift_message">
+                            <div class="iwd_opc_universal_wrapper iwd_opc_message
+                                iwd_opc_section_message error_message"
+                                 style="display:none;">
+
+                            </div>
+                            <?php echo $this->getChildHtml('gift_message'); ?>
+                            <?php echo $this->getChildHtml('loader'); ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <!--        --><?php //} ?>
+        <div class="iwd_opc_column" id="iwd_opc_payment_column">
+            <div class="iwd_opc_alternative_column">
+                <div class="iwd_opc_universal_wrapper iwd_opc_column_status">
+                    <div class="iwd_opc_column_alternative_status">
+                        <!--                        --><?php //if ($this->isVirtual()) { ?>
+                        <!--                            2-->
+                        <!--                        --><?php //} else { ?>
+                        3
+                        <!--                        --><?php //} ?>
+                    </div>
+                </div>
+                <div class="iwd_opc_column_content" tabindex="-1">
+                    <div id="iwd_opc_payment">
+                        <?php echo $this->getChildHtml('payment'); ?>
+                        <?php echo $this->getChildHtml('loader'); ?>
+                    </div>
+                    <?php if ($opcHelper->isShowSubscribe()) { ?>
+                        <div id="iwd_opc_subscribe">
+                            <?php echo $this->getChildHtml('subscribe'); ?>
+                        </div>
+                        <div class="iwd_opc_section_delimiter"></div>
+                    <?php } ?>
+                    <?php echo $this->getChildHtml('agreements'); ?>
+                    <div id="iwd_opc_place_order">
+                        <div class="iwd_opc_universal_wrapper">
+                            <button type="button"
+                                    id="iwd_opc_place_order_button"
+                                    title="<?php echo $this->escapeHtml($this->__('Place Order')); ?>"
+                                    class="iwd_opc_button">
+                                <?php echo $this->escapeHtml($this->__('Place Order')); ?>
+                            </button>
+                        </div>
+                        <div class="iwd_opc_universal_wrapper iwd_opc_message info_message" style="display:none;">
+                            <?php echo $this->escapeHtml($this->__('All required fields haven\'t been filled.')) ?>
+                        </div>
+                    </div>
+                    <div class="iwd_opc_universal_wrapper">
+                        <div id="iwd_opc_powered_by_logo">
+                            <a target="_blank"
+                               href="https://iwdagency.com/"
+                               title="<?php echo $this->escapeHtml($this->__('Powered by IWD')); ?>">
+                                <img id="iwd_opc_logo_for_retina"
+                                     src="data:image/png;base64,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"/>
+                                <img id="iwd_opc_logo_regular"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAAOCAYAAADQZhkSAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAANQSURBVHja7Jg9aFRBEMd/JzF+pchTIvhVeDY2UeRF8Bsxe2phJVzEPiSldpdC0noBURAhJpWFWOTEQrTxnola+JnXSMRCOEyrkFOjkihyFs7COOwLKYzNZbudNzM77//f/e+8l3PO0SwjSZKsRyUgUvObwNQ/Xj4HDANbgc3AJqC3heWxEbgoAPkxvATr7AL61fwn8GSZgD/jjAFmegnWsFLzHJhdJgA+AJX/sE63VUSAZiZgLXADyBv7HeC0sb0CbgFXlO0T0AvcVraGAN0JnAe2q2edJme16QhwzumL+DswCRSVyy+gAFwA1ij7PeAUEBuiThjba2AnMA60LlDKZ+AlwIpm2/am61tlHr8AvgU2ZhU4HpCQQsB2zoB/Hbhq/MaF7L8ImJQj1ABGlL2s7JOK8araPUV57lu5EWntdGxD/IrG5gLreF9tmwlcZATy+ZZyxrSZ1UDs/gCAXcBKZfsC1IDdxncCOBYA1pJyHzgY0n9NQCTAdgE75KViAcCJLQekhhwPeJ+aRzIfldgeic3JZRcDQzIfEHDI8HXik5OYMdOvI/kq4lOQmusCWiwaX/ItoJKgVuDwInb1I+CoaVPfA+2mlnm5FzpMRzUF7AnpvyYgL0WnUnhdFd4jNgQEfwJqpr1KFRmjKof9+skr37zKk+WbqLUxmmvzxco/kdrGBPyaidsHtKn5rLSG3QGwLCkPAqfxKXDI2J7JOlpppoF3lgCnCtdfhakpPBJg7VfkkCHNE+WloGF2+pjY6gJOyDc2xPpRD/TXZRXXo+JKUn+ozbSa/hhYLYDZU2HBfhiIzyKqEIjFEhArLS3KS0QZL5sa/fVF1mVekZd2Shpy5vR4OUtUXuvrzIkoBgjR+XzOPuUX6a9P8ysi1JfvNfr/VeRnm/HtMEQ1gLvAAePXKp2SHm+zCPD62yXFpAKCU9JSVlKgQcYQYKWBgERUFKghX20ryd0ztEC+yGhyLPH1wO5vF7AtAR8FTD/aMn5LXDNEXQbeSLweg8AWY9PtLS1SdEh/U7kAqwrgfuNXE73XMYkCoE9diusNqInkHsjw1TZfy2iApKICrWLuiiRj928ALqn5DwEQ4CRwZJHfSHMiXRPqVJ0F1i0QMy9SNwfwewDBl/rDsnNCAQAAAABJRU5ErkJggg=="/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="iwd_opc_clear"></div>
+        <?php echo $this->getChildHtml('loader'); ?>
+    </div>
+</div>
+<div class="iwd_opc_clear"></div>

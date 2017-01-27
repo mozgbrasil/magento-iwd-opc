@@ -1,0 +1,132 @@
+<?php
+/**
+ * @var $this Mage_Payment_Block_Form_Ccsave
+ */
+?>
+
+<?php $code = $this->getMethodCode(); ?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="text"
+           title="<?php echo $this->escapeHtml($this->__('Name on Card')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Name on Card')); ?>"
+           class="required-entry iwd_opc_field iwd_opc_input"
+           id="<?php echo $this->escapeHtml($code); ?>_cc_owner"
+           name="payment[cc_owner]"
+           data-stripe="name"
+           value="<?php echo $this->escapeHtml($this->getInfoData('cc_owner')) ?>"/>
+</div>
+<div class="iwd_opc_universal_wrapper iwd_opc_cc_wrapper"
+     data-https="<?php echo Mage::app()->getStore()->isCurrentlySecure() ? 1 : 0; ?>">
+    <input type="text"
+           id="<?php echo $this->escapeHtml($code); ?>_iwd_opc_cc_number"
+           name="payment[iwd_opc_cc_number]"
+           title="<?php echo $this->escapeHtml($this->__('Credit Card Number')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Credit Card Number')); ?>"
+           maxlength="23"
+           class="required-entry iwd_opc_field iwd_opc_input validate-iwd-opc-cc-number validate-iwd-opc-cc-type"
+           value=""/>
+    <input type="hidden"
+           data-stripe="number"
+           id="<?php echo $this->escapeHtml($code); ?>_cc_number"
+           value=""
+           name="payment[cc_number]"/>
+    <?php if (Mage::app()->getStore()->isCurrentlySecure()) { ?>
+        <span data-type="cc_on_https" data-icon="&#xf023" class="iwd_opc_payment_tooltip"
+              data-content="<?php echo $this->escapeHtml(
+                  $this->__('Rest easy. Your credit card information is safely secured.')
+              ); ?>">
+        </span>
+    <?php } ?>
+    <select id="<?php echo $this->escapeHtml($code); ?>_cc_type"
+            name="payment[cc_type]"
+            style="display: none;"
+            class="iwd_opc_select iwd_opc_field"
+    >
+        <option value=""></option>
+        <?php foreach ($this->getCcAvailableTypes() as $typeCode => $typeName) { ?>
+            <option value="<?php echo $this->escapeHtml($typeCode); ?>">
+                <?php echo $this->escapeHtml($typeName); ?>
+            </option>
+        <?php } ?>
+    </select>
+    <?php if ($this->getCcAvailableTypes()) { ?>
+        <div class="iwd_opc_cc_types" style="display: none;">
+            <?php $i = 0;
+            foreach ($this->getCcAvailableTypes() as $typeCode => $typeName) {
+                if ($i == 3) {
+                    break;
+                }
+                ?>
+                <div class="iwd_opc_cc_wrapper"
+                     title="<?php echo $this->escapeHtml($typeName); ?>"
+                     data-cc-type="<?php echo $this->escapeHtml($typeCode); ?>"></div>
+                <?php $i++;
+            } ?>
+            <?php if (count($this->getCcAvailableTypes()) > 3) { ?>
+                <div class="iwd_opc_cc_wrapper iwd_opc_more_cc_types">
+                    <span data-type="cc_type" data-icon="&#xf055" class="iwd_opc_payment_tooltip">
+                        <span class="iwd_opc_tooltip_content_fixed">
+                            <?php foreach ($this->getCcAvailableTypes() as $typeCode => $typeName) { ?>
+                                <div class="iwd_opc_cc_wrapper"
+                                     title="<?php echo $this->escapeHtml($typeName); ?>"
+                                     data-cc-type="<?php echo $this->escapeHtml($typeCode); ?>"></div>
+                            <?php } ?>
+                        </span>
+                    </span>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>
+<?php if ($this->hasVerification()){ ?>
+<div class="iwd_opc_short_fields">
+    <?php } ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php
+        $expCardValue = '';
+        if ($this->getInfoData('cc_exp_month') && $this->getInfoData('cc_exp_year')) {
+            $expCardValue = $this->getInfoData('cc_exp_month') . '/' . $this->getInfoData('cc_exp_year');
+        }
+        ?>
+        <input type="text"
+               id="<?php echo $this->escapeHtml($code); ?>_expiration_mon_yr"
+               name="payment[iwd_opc_cc_exp]"
+               maxlength="7"
+               title="<?php echo $this->escapeHtml($this->__('MM/YYYY')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('MM/YYYY')); ?>"
+               class="iwd_opc_field iwd_opc_input required-entry validate-iwd-opc-cc-exp"
+               value="<?php echo $this->escapeHtml($expCardValue); ?>"/>
+        <input type="hidden"
+               data-stripe="exp-month"
+               id="<?php echo $this->escapeHtml($code); ?>_expiration"
+               value="<?php echo $this->escapeHtml($this->getInfoData('cc_exp_month')); ?>"
+               name="payment[cc_exp_month]"/>
+        <input type="hidden"
+               data-stripe="exp-year"
+               id="<?php echo $this->escapeHtml($code); ?>_expiration_yr"
+               value="<?php echo $this->escapeHtml($this->getInfoData('cc_exp_year')); ?>"
+               name="payment[cc_exp_year]"/>
+    </div>
+    <?php echo $this->getChildHtml(); ?>
+    <?php if ($this->hasVerification()) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="text"
+                   data-stripe="cvc"
+                   title="<?php echo $this->escapeHtml($this->__('CVV')); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->__('CVV')); ?>"
+                   class="iwd_opc_field iwd_opc_input required-entry validate-iwd-opc-cvv"
+                   id="<?php echo $this->escapeHtml($code); ?>_cc_cid"
+                   maxlength="4"
+                   name="payment[cc_cid]"
+                   value=""/>
+            <span data-type="cvv" data-icon="&#xf059" class="iwd_opc_payment_tooltip"
+                  data-content="<?php echo $this->escapeHtml(
+                      $this->__('A 3 or 4-digit security code on the back or front of your card.')
+                  ); ?>">
+            </span>
+        </div>
+    <?php } ?>
+    <?php if ($this->hasVerification()){ ?>
+</div>
+    <div class="iwd_opc_clear"></div>
+<?php } ?>

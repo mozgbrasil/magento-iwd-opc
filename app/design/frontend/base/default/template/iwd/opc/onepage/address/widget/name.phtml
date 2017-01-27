@@ -1,0 +1,119 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Widget_Name
+ * @var $opcHelper IWD_Opc_Helper_Data
+ * @var $customerAddressHelper Mage_Customer_Helper_Address
+ */
+?>
+<?php
+$opcHelper = Mage::helper('iwd_opc');
+$customerAddressHelper = $this->helper('customer/address');
+?>
+<?php if ($this->showPrefix()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php if ($this->getPrefixOptions() === false) { ?>
+            <input type="text"
+                   name="<?php echo $this->escapeHtml($this->getFieldName('prefix')); ?>"
+                   value="<?php echo $this->escapeHtml($this->getObject()->getPrefix()); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->getStoreLabel('prefix')); ?>"
+                   title="<?php echo $this->escapeHtml($this->getStoreLabel('prefix')); ?>"
+                   class="iwd_opc_field iwd_opc_input
+            <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('prefix')); ?>
+                    <?php echo $this->escapeHtml($this->getFieldParams()); ?>"/>
+        <?php } else { ?>
+            <select name="<?php echo $this->escapeHtml($this->getFieldName('prefix')); ?>"
+                    title="<?php echo $this->escapeHtml($this->getStoreLabel('prefix')); ?>"
+                    class="iwd_opc_field iwd_opc_select
+            <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('prefix')); ?>
+                    <?php echo $this->escapeHtml($this->getFieldParams()); ?>">
+                <?php
+                $prefixOptions = $this->getPrefixOptions();
+                asort($prefixOptions);
+                foreach ($prefixOptions as $option) { ?>
+                    <option value="<?php echo $this->escapeHtml($option); ?>"
+                        <?php if ($this->getObject()->getPrefix() == $option) { ?>
+                            selected="selected"
+                        <?php } ?>
+                    >
+                        <?php
+                        if (!$option) {
+                            $option = $opcHelper->__('Please select prefix');
+                        }
+
+                        echo $this->escapeHtml($option); ?>
+                    </option>
+                <?php } ?>
+            </select>
+        <?php } ?>
+    </div>
+<?php } ?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="text"
+           name="<?php echo $this->escapeHtml($this->getFieldName('firstname')); ?>"
+           value="<?php echo $this->escapeHtml($this->getObject()->getFirstname()); ?>"
+           title="<?php echo $this->escapeHtml($this->getStoreLabel('firstname')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->getStoreLabel('firstname')); ?>"
+           class="iwd_opc_field iwd_opc_input
+        <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('firstname')); ?>"
+        <?php echo $this->escapeHtml($this->getFieldParams()); ?> />
+</div>
+<?php if ($this->showMiddlename()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="<?php echo $this->escapeHtml($this->getFieldName('middlename')); ?>"
+               value="<?php echo $this->escapeHtml($this->getObject()->getMiddlename()); ?>"
+               title="<?php echo $this->escapeHtml($this->getStoreLabel('middlename')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->getStoreLabel('middlename')); ?>"
+               class="iwd_opc_field iwd_opc_input
+        <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('middlename')); ?>"
+            <?php echo $this->escapeHtml($this->getFieldParams()); ?> />
+    </div>
+<?php } ?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="text"
+           name="<?php echo $this->escapeHtml($this->getFieldName('lastname')); ?>"
+           value="<?php echo $this->escapeHtml($this->getObject()->getLastname()); ?>"
+           title="<?php echo $this->escapeHtml($this->getStoreLabel('lastname')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->getStoreLabel('lastname')); ?>"
+           class="iwd_opc_field iwd_opc_input
+        <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('lastname')); ?>"
+        <?php echo $this->escapeHtml($this->getFieldParams()); ?> />
+</div>
+<?php if ($this->showSuffix()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php if ($this->getSuffixOptions() === false) { ?>
+            <input type="text"
+                   name="<?php echo $this->escapeHtml($this->getFieldName('suffix')); ?>"
+                   value="<?php echo $this->escapeHtml($this->getObject()->getSuffix()); ?>"
+                   title="<?php echo $this->escapeHtml($this->getStoreLabel('suffix')); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->getStoreLabel('suffix')); ?>"
+                   class="iwd_opc_field iwd_opc_input
+            <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('suffix')); ?>"
+                <?php echo $this->escapeHtml($this->getFieldParams()); ?> />
+        <?php } else { ?>
+            <select name="<?php echo $this->escapeHtml($this->getFieldName('suffix')); ?>"
+                    title="<?php echo $this->escapeHtml($this->getStoreLabel('suffix')); ?>"
+                    class="iwd_opc_field iwd_opc_select
+            <?php echo $this->escapeHtml($customerAddressHelper->getAttributeValidationClass('suffix')); ?>"
+                <?php echo $this->escapeHtml($this->getFieldParams()); ?>>
+                <?php
+                $suffixOptions = $this->getSuffixOptions();
+                asort($suffixOptions);
+                foreach ($suffixOptions as $option) { ?>
+                    <option value="<?php echo $this->escapeHtml($option); ?>"
+                        <?php if ($this->getObject()->getSuffix() == $option) { ?>
+                            selected="selected"
+                        <?php } ?>
+                    >
+                        <?php
+                        if (!$option) {
+                            $option = $opcHelper->__('Please select suffix');
+                        }
+
+                        echo $this->escapeHtml($option); ?>
+                    </option>
+                <?php } ?>
+            </select>
+        <?php } ?>
+    </div>
+<?php } ?>

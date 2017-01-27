@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Review_Renderer_Shipping
+ */
+?>
+<div class="iwd_opc_top_review_total">
+    <div class="iwd_opc_top_review_total_cell">
+        <?php echo $this->escapeHtml($this->__('Shipping')) . ':'; ?>
+    </div>
+    <div class="iwd_opc_top_review_total_cell">
+        <?php echo $this->escapeHtml($this->helper('iwd_opc')->formatPrice($this->getShippingPrice(), false)); ?>
+    </div>
+</div>
+<?php if ($this->displayBoth()) { ?>
+    <div class="iwd_opc_top_review_total iwd_opc_top_review_total_tax">
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->__('Shipping + Tax')) . ':'; ?>
+        </div>
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml(
+                $this->helper('iwd_opc')->formatPrice($this->getShippingIncludeTax(), false)
+            ); ?>
+        </div>
+    </div>
+<?php } ?>

@@ -1,0 +1,251 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Billing
+ * @var $opcAddressHelper IWD_Opc_Helper_Address
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$isLoggedIn = $this->isCustomerLoggedIn();
+$customerHasAddress = $this->customerHasAddresses();
+$opcHelper = $this->helper('iwd_opc');
+$opcAddressHelper = $this->helper('iwd_opc/address');
+$allowGuestCheckout = Mage::helper('checkout')->isAllowedGuestCheckout(
+    $this->getQuote(), $this->getQuote()->getStoreId()
+);
+?>
+<?php if ($isLoggedIn && $customerHasAddress) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php echo $this->getAddressHtmlSelect(); ?>
+    </div>
+<?php } ?>
+<div id="iwd_opc_billing_address_fields"
+    <?php if ($customerHasAddress) { ?>
+        style="display:none;"
+    <?php } ?>
+>
+    <input type="hidden"
+           name="billing[address_id]"
+           value="<?php echo $this->escapeHtml($this->getAddress()->getId()); ?>"/>
+    <?php echo $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_name')
+        ->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())
+        ->setForceUseCustomerRequiredAttributes(!$isLoggedIn)
+        ->setFieldIdFormat('billing:%s')
+        ->setFieldNameFormat('billing[%s]')
+        ->toHtml(); ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="billing[company]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Company')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Company')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('company')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <?php echo $this->getCountrySelect(); ?>
+    </div>
+    <?php $streetValidationClass = $opcAddressHelper->getAttributeValidationClass('street'); ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('Street Address')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Street Address')); ?>"
+               name="billing[street][]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)); ?>"
+               class="iwd_opc_field iwd_opc_input <?php echo $this->escapeHtml($streetValidationClass); ?>"/>
+    </div>
+    <?php $streetValidationClass = trim(str_replace('required-entry', '', $streetValidationClass)); ?>
+    <?php for ($i = 2, $n = $this->helper('customer/address')->getStreetLines(); $i <= $n; $i++) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="text"
+                   title="<?php echo $this->escapeHtml($this->__('Street Address %s', $i)); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->__('Street Address %s', $i)); ?>"
+                   name="billing[street][]"
+                   value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($i)); ?>"
+                   class="iwd_opc_field iwd_opc_input <?php echo $this->escapeHtml($streetValidationClass); ?>"/>
+        </div>
+    <?php } ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('City')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('City')); ?>"
+               name="billing[city]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getCity()); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('city')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <select id="billing:region_id"
+                name="billing[region_id]"
+                title="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+                class="iwd_opc_field iwd_opc_select"
+                style="display:none;">
+            <option value="">
+                <?php echo $this->escapeHtml($this->__('State or Region')); ?>
+            </option>
+        </select>
+        <script type="text/javascript">
+            //<![CDATA[
+            $('billing:region_id').setAttribute('defaultValue', "<?php echo $this->escapeHtml(
+                $this->getAddress()->getRegionId()
+            ); ?>");
+            //]]>
+        </script>
+        <input type="text"
+               id="billing:region"
+               name="billing[region]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                    <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('region')); ?>"
+               style="display:none;"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('Zip Code')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Zip Code')); ?>"
+               name="billing[postcode]"
+               id="billing:postcode"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()); ?>"
+               class="iwd_opc_field iwd_opc_input validate-zip-international
+                    <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('postcode')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="billing[telephone]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Telephone')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Telephone')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('telephone')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="billing[fax]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getFax()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Fax')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Fax')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('fax')); ?>"/>
+    </div>
+    <?php if ($opcAddressHelper->isVatAttributeVisible()) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="text"
+                   name="billing[vat_id]"
+                   value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()); ?>"
+                   title="<?php echo $this->escapeHtml($this->__('VAT Number')); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->__('VAT Number')); ?>"
+                   class="iwd_opc_field iwd_opc_input
+                    <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('vat_id')); ?>"/>
+        </div>
+    <?php } ?>
+    <?php if (!$isLoggedIn) { ?>
+        <?php $dateOfBirth = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_dob'); ?>
+        <?php $gender = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_gender'); ?>
+        <?php $taxvat = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_taxvat'); ?>
+        <?php if ($dateOfBirth->isEnabled()) { ?>
+            <?php echo $dateOfBirth
+                ->setDate($this->getQuote()->getCustomerDob())
+                ->setFieldIdFormat('billing:%s')
+                ->setFieldNameFormat('billing[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+        <?php if ($gender->isEnabled()) { ?>
+            <?php echo $gender
+                ->setGender($this->getQuote()->getCustomerGender())
+                ->setFieldIdFormat('billing:%s')
+                ->setFieldNameFormat('billing[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+        <?php if ($taxvat->isEnabled()) { ?>
+            <?php echo $taxvat
+                ->setTaxvat($this->getQuote()->getCustomerTaxvat())
+                ->setFieldIdFormat('billing:%s')
+                ->setFieldNameFormat('billing[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+    <?php } ?>
+    <?php if (!$allowGuestCheckout && !$isLoggedIn) { ?>
+        <input type="hidden" name="billing[create_account]" id="billing:create_account" value="1"/>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="password"
+                   name="billing[customer_password]"
+                   title="<?php echo $this->escapeHtml($this->__('Password')); ?>"
+                   placeholder="<?php echo $this->__('Password') ?>"
+                   class="iwd_opc_field iwd_opc_input required-entry validate-password"
+                   value=""/>
+            <span title="<?php echo $this->escapeHtml($this->__('Show/Hide password')); ?>"
+                  class="iwd_opc_show_hide_password active"></span>
+        </div>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="password"
+                   name="billing[confirm_password]"
+                   title="<?php echo $this->escapeHtml($this->__('Confirm Password')); ?>"
+                   placeholder="<?php echo $this->__('Confirm Password') ?>"
+                   class="iwd_opc_field iwd_opc_input required-entry validate-iwd-opc-cpassword"
+                   value=""/>
+            <span title="<?php echo $this->escapeHtml($this->__('Show/Hide password')); ?>"
+                  class="iwd_opc_show_hide_password active"></span>
+        </div>
+    <?php } ?>
+    <div class="iwd_opc_clear"></div>
+    <?php if ($isLoggedIn && $customerHasAddress) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <label class="iwd_opc_checkbox_label"
+                   title="<?php echo $this->escapeHtml($this->__('Save in address book')); ?>"
+                   for="billing:save_in_address_book">
+                <input type="checkbox"
+                       name="billing[save_in_address_book]"
+                       id="billing:save_in_address_book"
+                       class="iwd_opc_checkbox iwd_opc_field"
+                       value="1"
+                    <?php if ($this->getAddress()->getSaveInAddressBook()) { ?>
+                        checked="checked"
+                    <?php } ?>/>
+                <span class="iwd_opc_checkbox_label_value">
+                    <?php echo $this->escapeHtml($this->__('Save in address book')); ?>
+                </span>
+            </label>
+        </div>
+    <?php } else { ?>
+        <input type="hidden" name="billing[save_in_address_book]" value="1"/>
+    <?php } ?>
+</div>
+<?php if ($this->canShip()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <label class="iwd_opc_checkbox_label"
+               title="<?php echo $this->escapeHtml($this->__('Ship to different address')); ?>"
+               for="billing:use_for_shipping">
+            <input type="checkbox"
+                   name="billing[use_for_shipping]"
+                   id="billing:use_for_shipping"
+                <?php if ($opcHelper->isShowShippingForm()) { ?>
+                    disabled="disabled"
+                <?php } ?>
+                <?php if (!$this->isUseBillingAddressForShipping() || $opcHelper->isShowShippingForm()) { ?>
+                    checked="checked"
+                    value="0"
+                <?php } else { ?>
+                    value="1"
+                <?php } ?>
+                   class="iwd_opc_checkbox iwd_opc_field"/>
+            <span class="iwd_opc_checkbox_label_value">
+                <?php echo $this->escapeHtml($this->__('Ship to different address')); ?>
+            </span>
+        </label>
+    </div>
+<?php } else { ?>
+    <input type="hidden" name="billing[use_for_shipping]" value="1"/>
+<?php } ?>
+<script type="text/javascript">
+    //<![CDATA[
+    var billingRegionUpdater = new RegionUpdater(
+        'billing:country_id',
+        'billing:region',
+        'billing:region_id',
+        <?php echo $this->jsQuoteEscape($this->helper('directory')->getRegionJson()); ?>,
+        undefined,
+        'billing:postcode');
+    //]]>
+</script>

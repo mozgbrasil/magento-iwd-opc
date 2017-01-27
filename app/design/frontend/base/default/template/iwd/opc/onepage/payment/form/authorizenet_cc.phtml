@@ -1,0 +1,66 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Paygate_Authorizenet_Form_Cc
+ */
+?>
+
+<?php
+$formMessage = $this->getPartialAuthorizationFormMessage();
+$isPartialAuthorization = $this->isPartialAuthorization();
+$code = $this->getMethodCode();
+?>
+<?php if ($isPartialAuthorization || $formMessage) { ?>
+    <?php if ($formMessage) { ?>
+        <div class="iwd_opc_universal_wrapper iwd_opc_message success_message">
+            <?php echo $this->escapeHtml($formMessage); ?>
+        </div>
+    <?php } ?>
+
+    <?php if ($this->isPartialAuthorization()) { ?>
+        <div id="iwd_opc_authorize_net_partial_authorization">
+            <div class="iwd_opc_authorize_net_cards">
+                <?php echo $this->getChildHtml('cards'); ?>
+            </div>
+            <div class="iwd_opc_universal_wrapper">
+                <button type="button" title="<?php echo $this->escapeHtml($this->__('Cancel')); ?>"
+                        class="iwd_opc_button"
+                        id="iwd_opc_authorizenet_cancel_button">
+                    <?php echo $this->escapeHtml($this->__('Cancel')); ?>
+                </button>
+            </div>
+            <div class="iwd_opc_universal_wrapper iwd_opc_authorize_net_label">
+                <?php echo $this->escapeHtml(
+                    $this->__('To cancel pending authorizations and release amounts that have already been processed 
+                    during this payment, click Cancel.')
+                ); ?>
+            </div>
+        </div>
+        <div class="iwd_opc_universal_wrapper iwd_opc_message success_message">
+            <?php echo $this->escapeHtml(
+                $this->__('Please enter another credit card number to complete your purchase.')
+            ); ?>
+        </div>
+        <script type="text/javascript">
+            //<![CDATA[
+            PaymentMethodAuthorizeNet.prototype.confirmCancel = function () {
+                if (!confirm('<?php echo Mage::helper('core')->jsQuoteEscape(
+                        $this->getCancelConfirmationMessage()
+                    ) ?>')) {
+                    return;
+                }
+
+                this.cancel();
+            };
+
+            <?php if ($message = $this->getPartialAuthorizationConfirmationMessage()){ ?>
+                if (!confirm('<?php echo Mage::helper('core')->jsQuoteEscape($message); ?>')) {
+                    Singleton.get(PaymentMethodAuthorizeNet).cancel();
+                }
+            <?php }?>
+            //]]>
+        </script>
+
+    <?php } ?>
+
+<?php } ?>
+<?php echo $this->getChildHtml('method_form_block'); ?>

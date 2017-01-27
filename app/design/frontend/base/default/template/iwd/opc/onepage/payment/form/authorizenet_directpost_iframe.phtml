@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Authorizenet_Directpost_Iframe
+ * @var $helper Mage_Authorizenet_Helper_Data
+ */
+?>
+<?php
+$params = $this->getParams();
+$helper = $this->helper('authorizenet');
+?>
+<html>
+<head>
+    <script type="text/javascript">
+        //<![CDATA[
+        <?php if (isset($params['redirect'])): ?>
+        window.location="<?php echo $this->escapeUrl($params['redirect']) ?>";
+        <?php endif; ?>
+        <?php if (isset($params['redirect_parent'])): ?>
+        window.top.location="<?php echo $this->escapeUrl($params['redirect_parent']) ?>";
+        <?php endif; ?>
+        <?php if (isset($params['error_msg'])): ?>
+        window.top.Singleton.get(window.top.PaymentMethodAuthorizeNetDirectPost).showError(
+            <?php echo $this->helper('core')->jsonEncode($params['error_msg']) ?>
+        );
+        <?php endif; ?>
+        //]]>
+    </script>
+</head>
+<body></body>
+</html>

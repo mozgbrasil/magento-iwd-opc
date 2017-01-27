@@ -1,0 +1,69 @@
+<?php
+/**
+ * @var $this Mage_Checkout_Block_Cart_Item_Renderer
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$item = $this->getItem();
+$opcHelper = $this->helper('iwd_opc');
+?>
+<div class="iwd_opc_top_review_item">
+    <div class="iwd_opc_top_review_item_cell">
+        <div class="iwd_opc_top_review_item_name">
+            <?php echo $this->escapeHtml($this->getProductName()); ?>
+        </div>
+        <?php if ($options = $this->getOptionList()) { ?>
+            <div class="iwd_opc_top_review_item_options">
+                <?php foreach ($options as $option) { ?>
+                    <div class="iwd_opc_top_review_item_option">
+                        <?php $formatedOptionValue = $this->getFormatedOptionValue($option); ?>
+                        <div class="iwd_opc_top_review_item_option_label">
+                            <?php echo $this->escapeHtml($option['label']) . ':&nbsp'; ?>
+                        </div>
+                        <div class="iwd_opc_top_review_item_option_value
+                            <?php if (isset($formatedOptionValue['full_view'])) { ?>
+                             iwd_opc_top_review_item_option_value_truncated
+                            <?php } ?>
+                        ">
+                            <?php if (isset($formatedOptionValue['full_view'])) { ?>
+                                <?php echo $formatedOptionValue['full_view']; ?>
+                            <?php } else { ?>
+                                <?php echo $formatedOptionValue['value']; ?>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+        <?php if ($addtInfoBlock = $this->getProductAdditionalInformationBlock()) { ?>
+            <?php echo $this->escapeHtml($addtInfoBlock->setItem($item)->toHtml()); ?>
+        <?php } ?>
+    </div>
+    <div class="iwd_opc_top_review_item_cell">
+        <div class="iwd_opc_top_review_item_qty">
+            <?php echo $this->escapeHtml('x' . $item->getQty()); ?>
+        </div>
+    </div>
+    <div class="iwd_opc_top_review_item_cell">
+        <div class="iwd_opc_top_review_item_subtotal">
+            <?php
+            $excl = $opcHelper->formatPrice($item->getRowTotal(), false);
+            $incl = $opcHelper->formatPrice(
+                $this->helper('checkout')->getSubtotalInclTax($item) - $item->getWeeeTaxRowDisposition(), false
+            );
+            if ($this->helper('tax')->displayCartBothPrices()) {
+                echo $this->escapeHtml($excl);
+            } elseif ($this->helper('tax')->displayCartPriceExclTax()) {
+                echo $this->escapeHtml($excl);
+            } else {
+                echo $this->escapeHtml($incl);
+            } ?>
+        </div>
+        <div class="iwd_opc_top_review_item_subtotal_incl_tax">
+            <?php if ($this->helper('tax')->displayCartBothPrices()) {
+                echo $this->escapeHtml($incl);
+            } ?>
+        </div>
+    </div>
+</div>

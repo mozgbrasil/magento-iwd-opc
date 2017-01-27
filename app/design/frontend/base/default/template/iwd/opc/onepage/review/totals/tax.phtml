@@ -1,0 +1,52 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Review_Renderer_Tax
+ */
+?>
+<?php
+$value = $this->getTotal()->getValue();
+?>
+<?php global $taxIter;
+$taxIter++; ?>
+<?php if ($this->helper('tax')->displayFullSummary() && $value != 0) { ?>
+    <?php foreach ($this->getTotal()->getFullInfo() as $info) { ?>
+        <?php if (isset($info['hidden']) && $info['hidden']) continue; ?>
+        <?php $percent = $info['percent']; ?>
+        <?php $amount = $info['amount']; ?>
+        <?php $rates = $info['rates']; ?>
+        <?php foreach ($rates as $rate) { ?>
+            <div class="iwd_opc_top_review_total">
+                <div class="iwd_opc_top_review_total_cell">
+                    <?php echo $this->escapeHtml($rate['title']); ?>
+                    <?php if (!is_null($rate['percent'])) { ?>
+                        (<?php echo (float)$rate['percent']; ?>%)
+                    <?php } ?>
+                </div>
+                <div class="iwd_opc_top_review_total_cell">
+                    <?php echo $this->escapeHtml($this->helper('iwd_opc')->formatPrice($amount, false)); ?>
+                </div>
+            </div>
+        <?php } ?>
+    <?php } ?>
+    <?php $weees = $this->getAllWeee(); ?>
+    <?php foreach ($weees as $weeeTitle => $weeeAmount) { ?>
+        <div class="iwd_opc_top_review_total">
+            <div class="iwd_opc_top_review_total_cell">
+                <?php echo $this->escapeHtml($weeeTitle); ?>
+            </div>
+            <div class="iwd_opc_top_review_total_cell">
+                <?php echo $this->helper('iwd_opc')->formatPrice($weeeAmount, false); ?>
+            </div>
+        </div>
+    <?php } ?>
+<?php } else { ?>
+    <div class="iwd_opc_top_review_total">
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->__('Total Tax')) . ':'; ?>
+        </div>
+        <div class="iwd_opc_top_review_total_cell">
+            <?php echo $this->escapeHtml($this->helper('iwd_opc')->formatPrice($value, false)); ?>
+        </div>
+    </div>
+<?php } ?>
+

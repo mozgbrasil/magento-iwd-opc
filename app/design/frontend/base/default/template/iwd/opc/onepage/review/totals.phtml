@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Review_Totals
+ */
+?>
+<?php if ($this->getTotals()) { ?>
+    <?php echo $this->renderTotals(null, 1); ?>
+    <?php echo $this->renderTotals('taxes', 1); ?>
+    <?php echo $this->renderTotals('footer', 1); ?>
+<?php } ?>

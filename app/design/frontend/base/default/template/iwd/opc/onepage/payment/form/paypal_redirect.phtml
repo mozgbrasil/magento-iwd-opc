@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Paypal_Express_Form
+ */
+?>
+<div class="iwd_opc_universal_wrapper">
+    <div class="iwd_opc_paypal_redirect_icon"></div>
+</div>
+<div class="iwd_opc_universal_wrapper">
+    <?php echo $this->escapeHtml($this->__('You will be redirected to another page to complete your checkout.')); ?>
+</div>
+<?php if ($code = $this->getCreateBACode()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <label
+            title="<?php echo $this->escapeHtml(
+                $this->__('Sign a billing agreement to streamline further purchases with PayPal.')
+            ); ?>"
+            class="iwd_opc_checkbox_label"
+            for="iwd_opc_paypal_ba_<?php echo $this->escapeHtml($code); ?>">
+            <input type="checkbox"
+                   id="iwd_opc_paypal_ba_<?php echo $this->escapeHtml($code); ?>"
+                   value="1"
+                   name="payment[<?php echo $this->escapeHtml($code); ?>]"
+                   class="iwd_opc_checkbox iwd_opc_field"/>
+            <span class="iwd_opc_checkbox_label_value">
+                <?php echo $this->escapeHtml(
+                    $this->__('Sign a billing agreement to streamline further purchases with PayPal.')
+                ); ?>
+            </span>
+        </label>
+    </div>
+<?php } ?>

@@ -1,0 +1,65 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Discount
+ */
+?>
+<?php
+$couponCode = $this->getCouponCode();
+$discountAmount = 0;
+$totals = $this->getQuote()->getTotals();
+if ($couponCode && isset($totals['discount'])) {
+    $discountAmount = str_replace('-', '', $this->getQuote()->getTotals()['discount']->getValue());
+}
+?>
+<div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message" style="display:none;">
+
+</div>
+<div class="iwd_opc_universal_wrapper">
+    <button type="button" id="iwd_opc_add_discount_button" class="iwd_opc_button active"
+            title="<?php echo $this->escapeHtml($this->__('Add Discount Code')); ?>">
+        <?php echo $this->escapeHtml($this->__('Add Discount Code')); ?>
+    </button>
+</div>
+<div id="iwd_opc_discount_form"
+    <?php if ($couponCode) { ?>
+        class="selected"
+    <?php } ?>
+>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               id="iwd_opc_discount_input"
+               title="<?php echo $this->escapeHtml($this->__('Discount Code')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Discount Code')); ?>"
+               value="<?php echo $this->escapeHtml($couponCode); ?>"
+            <?php if ($couponCode) { ?>
+                disabled="disabled"
+            <?php } ?>
+               class="iwd_opc_field iwd_opc_input"/>
+    </div>
+    <?php if (!$couponCode) { ?>
+        <div class="iwd_opc_universal_wrapper iwd_opc_small_button_container">
+            <button type="button" id="iwd_opc_apply_discount_button" class="iwd_opc_small_button"
+                    title="<?php echo $this->escapeHtml($this->__('Apply')); ?>">
+                <?php echo $this->escapeHtml($this->__('Apply')); ?>
+            </button>
+            <button type="button" id="iwd_opc_cancel_button" class="iwd_opc_small_button"
+                    title="<?php echo $this->escapeHtml($this->__('Cancel')); ?>">
+                <?php echo $this->escapeHtml($this->__('Cancel')); ?>
+            </button>
+        </div>
+    <?php } else { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <div class="iwd_opc_additional_payment_label"><?php echo $this->escapeHtml($this->__('Discount:')) ?></div>
+            <div class="iwd_opc_additional_payment_value">
+                <?php echo $this->escapeHtml($this->helper('iwd_opc')->formatPrice($discountAmount, false)); ?>
+            </div>
+        </div>
+        <div class="iwd_opc_universal_wrapper">
+            <button type="button" id="iwd_opc_remove_discount_button"
+                    class="iwd_opc_button"
+                    title="<?php echo $this->escapeHtml($this->__('Remove')); ?>">
+                <?php echo $this->escapeHtml($this->__('Remove')); ?>
+            </button>
+        </div>
+    <?php } ?>
+</div>

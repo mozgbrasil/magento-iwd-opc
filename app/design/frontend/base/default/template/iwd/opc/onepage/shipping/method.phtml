@@ -1,0 +1,152 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Shipping_Method
+ */
+?>
+<?php
+$shippingRateGroups = $this->getShippingRates();
+$selectedShippingRateGroup = '';
+$selectedShippingRate = '';
+$selectedShippingMethod = '';
+if ($this->getAddressShippingMethod()) {
+    $selectedShippingMethod = $this->getAddressShippingMethod();
+    $selectedShippingMethodArr = explode('_', $this->getAddressShippingMethod());
+    if (!empty($selectedShippingMethodArr[0]) && !empty($selectedShippingMethodArr[1])) {
+        $selectedShippingRateGroup = $selectedShippingMethodArr[0];
+        $selectedShippingRate = $selectedShippingMethodArr[1];
+    }
+} else {
+    $selectedShippingRateGroup = $this->getShippingRateGroup();
+}
+
+?>
+<div id="iwd_opc_shipping_load_container">
+    <form class="iwd_opc_form" id="iwd_opc_shipping_method_form">
+        <?php if (!$shippingRateGroups) {
+            $shippingUnavailableLabel = 'Shipping Unavailable';
+            if ($this->getQuote()->getIsVirtual()) {
+                $shippingUnavailableLabel = 'Order Does Not Require Shipping';
+            } elseif (!$this->getAddress()->getCountryId() || !$this->getAddress()->getCity()) {
+                $shippingUnavailableLabel = 'Shipping Address Required';
+            }
+            ?>
+            <div class="iwd_opc_universal_wrapper">
+                <select disabled="disabled"
+                        class="iwd_opc_field iwd_opc_select required-entry"
+                        title="<?php echo $this->escapeHtml($this->__($shippingUnavailableLabel)); ?>"
+                        name="iwd_opc_shipping_method_unavailable">
+                    <option value=""><?php echo $this->escapeHtml($this->__($shippingUnavailableLabel)); ?></option>
+                </select>
+            </div>
+        <?php } else {
+            $shippingGroupSelectIsHidden = false;
+            if ($selectedShippingMethod) {
+                foreach ($shippingRateGroups as $code => $rates) {
+                    foreach ($rates as $rate) {
+                        if (count($rates) === 1 && $rate->getCode() === $selectedShippingMethod) {
+                            $shippingGroupSelectIsHidden = true;
+                        }
+                    }
+                }
+            }
+            ?>
+            <div class="iwd_opc_universal_wrapper"
+                <?php if ($shippingGroupSelectIsHidden) { ?>
+                    style="display: none;"
+                <?php } ?>
+                 id="iwd_opc_shipping_method_group">
+                <select data-can-unselect="true"
+                        class="required-entry iwd_opc_field iwd_opc_select"
+                        name="iwd_opc_shipping_method_group_select"
+                        id="iwd_opc_shipping_method_group_select"
+                        title="<?php echo $this->escapeHtml($this->__('Select Shipping Rate Group')); ?>">
+                    <option></option>
+                    <?php foreach ($shippingRateGroups as $code => $rates) { ?>
+                        <option value="<?php echo $this->escapeHtml($code); ?>"
+                            <?php if ($code == $selectedShippingRateGroup) { ?>
+                                selected="selected"
+                            <?php } ?>>
+                            <?php echo $this->escapeHtml($this->getCarrierName($code)); ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div id="iwd_opc_shipping_rates">
+                <?php foreach ($shippingRateGroups as $code => $rates) {
+                    $isSingleRate = count($rates) === 1;
+                    ?>
+                    <div data-group-code="<?php echo $this->escapeHtml($code); ?>"
+                         class="iwd_opc_universal_wrapper iwd_opc_shipping_one_rate_group
+                     <?php if ($code == $selectedShippingRateGroup) { ?>
+                        selected
+                     <?php } ?>
+                "
+                        <?php if ($code != $selectedShippingRateGroup) { ?>
+                            style="display: none;"
+                        <?php } ?>
+                    >
+                        <?php
+                        $isSelectDisabled = false;
+                        foreach ($rates as $rate) {
+                            if ($rate->getErrorMessage()) {
+                                $isSelectDisabled = true;
+                            }
+                        }
+                        ?>
+                        <select data-can-unselect="true"
+                            <?php if ($isSelectDisabled) { ?>
+                                disabled="disabled"
+                            <?php } ?>
+                                title="<?php echo $this->escapeHtml($this->__('Select Shipping Rate')); ?>"
+                                class="required-entry iwd_opc_field iwd_opc_select iwd_opc_shipping_one_rate"
+                                name="iwd_opc_shipping_method[<?php echo $this->escapeHtml($code); ?>]">
+                            <?php if (!$isSelectDisabled) { ?>
+                                <option></option>
+                            <?php } ?>
+                            <?php foreach ($rates as $rate) {
+                                $isSelected = $selectedShippingMethod == $rate->getCode();
+                                $price = $this->getShippingPrice(
+                                    $rate->getPrice(),
+                                    $this->helper('tax')->displayShippingPriceIncludingTax()
+                                );
+                                $priceInclTax = $this->getShippingPrice($rate->getPrice(), true);
+                                if ($this->helper('tax')->displayShippingBothPrices() && $priceInclTax != $price) {
+                                    $price .= ' (' . $this->__('Incl. Tax') . ' ' . $priceInclTax . ')';
+                                } ?>
+                                <option value="<?php echo(!$isSelectDisabled ? $this->escapeHtml($rate->getCode()) : ""); ?>"
+                                    <?php if ($isSelected) { ?>
+                                        selected="selected"
+                                    <?php } ?>>
+                                    <?php if ($rate->getErrorMessage()) { ?>
+                                        <?php echo $this->escapeHtml(
+                                            $this->__('Shipping method is\'t applicable.')
+                                        ); ?>
+                                    <?php } else { ?>
+                                        <?php echo $this->escapeHtml(
+                                            ($isSingleRate ? $this->getCarrierName($code) . ': ' : '') .
+                                            $rate->getMethodTitle() . ' - ' . $price
+                                        ); ?>
+                                    <?php } ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </form>
+    <script type="text/javascript">
+        var iwdOpcShippingMethodForm = new VarienForm('iwd_opc_shipping_method_form');
+        iwdOpcShippingMethodForm.validator.options = {
+            onSubmit: false,
+            stopOnFirst: false,
+            immediate: false,
+            focusOnError: false,
+            useTitles: false,
+            onFormValidate: function (result, form) {
+            },
+            onElementValidate: function (result, elm) {
+            }
+        };
+    </script>
+</div>

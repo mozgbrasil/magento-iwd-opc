@@ -1,0 +1,25 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$opcHelper = $this->getOpcHelper();
+?>
+<div id="iwd_opc_payment_method_additional">
+    <div id="iwd_opc_payment_method">
+        <?php echo $this->getChildHtml('payment_method'); ?>
+    </div>
+    <div class="iwd_opc_section_delimiter"></div>
+    <?php if ($opcHelper->isShowDiscountForm()) { ?>
+        <div id="iwd_opc_payment_additional">
+            <?php if ($opcHelper->isShowDiscountForm()) { ?>
+                <div id="iwd_opc_discount">
+                    <?php echo $this->getChildHtml('discount'); ?>
+                </div>
+                <div class="iwd_opc_section_delimiter"></div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</div>

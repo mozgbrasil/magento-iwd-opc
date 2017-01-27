@@ -1,0 +1,10 @@
+<?php
+/**
+ * @var $this Mage_Payment_Block_Form_Banktransfer
+ */
+?>
+<?php if ($instructions = $this->getInstructions()) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php echo nl2br($instructions); ?>
+    </div>
+<?php } ?>

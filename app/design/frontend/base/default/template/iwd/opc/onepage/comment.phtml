@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Comment
+ */
+?>
+<div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message" style="display:none;">
+
+</div>
+<div class="iwd_opc_universal_wrapper">
+    <form class="iwd_opc_form" id="iwd_opc_comment_form">
+            <textarea title="<?php echo $this->escapeHtml($this->__('Comment')); ?>"
+                      class="iwd_opc_field iwd_opc_textarea"
+                      id="comment"
+                      rows="1"
+                      placeholder="<?php echo $this->escapeHtml($this->__('Comment')); ?>"
+                      name="comment"><?php echo $this->escapeHtml($this->getComment()); ?></textarea>
+    </form>
+    <script type="text/javascript">
+        var iwdOpcCommentForm = new VarienForm('iwd_opc_comment_form');
+        iwdOpcCommentForm.validator.options = {
+            onSubmit: false,
+            stopOnFirst: false,
+            immediate: false,
+            focusOnError: false,
+            useTitles: false,
+            onFormValidate: function (result, form) {
+            },
+            onElementValidate: function (result, elm) {
+            }
+        };
+    </script>
+</div>

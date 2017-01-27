@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var $this Mage_Core_Block_Template
+ * @var $opcHelper IWD_Opc_Helper_Data
+ */
+?>
+<?php
+$opcHelper = $this->helper('iwd_opc');
+?>
+<div class="iwd_opc_popup_wrapper">
+    <div class="iwd_opc_popup_mask"></div>
+    <div class="iwd_opc_popup">
+        <div class="iwd_opc_popup_close">
+            <?php echo $this->escapeHtml($opcHelper->__('Return to Checkout')); ?>
+        </div>
+        <div class="iwd_opc_clear"></div>
+        <div class="iwd_opc_popup_content" tabindex="-1">
+
+        </div>
+    </div>
+</div>

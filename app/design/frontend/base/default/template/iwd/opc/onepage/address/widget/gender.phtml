@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Widget_Gender
+ */
+?>
+<div class="iwd_opc_universal_wrapper">
+    <select id="<?php echo $this->escapeHtml($this->getFieldId('gender')); ?>"
+            name="<?php echo $this->escapeHtml($this->getFieldName('gender')); ?>"
+            title="<?php echo $this->escapeHtml($this->__('Gender')); ?>"
+            class="iwd_opc_field iwd_opc_select
+            <?php if ($this->isRequired()) { ?>
+            validate-select
+            <?php } ?>"
+        <?php echo $this->escapeHtml($this->getFieldParams()); ?>>
+        <?php $options = Mage::getResourceSingleton('customer/customer')
+            ->getAttribute('gender')
+            ->getSource()
+            ->getAllOptions(); ?>
+        <?php $value = $this->getGender(); ?>
+        <?php foreach ($options as $option) { ?>
+            <option value="<?php echo $this->escapeHtml($option['value']); ?>"
+                <?php if ($option['value'] == $value) { ?>
+                    selected="selected"
+                <?php } ?>
+            >
+                <?php
+                if (!trim($option['label'])) {
+                    $option['label'] = $this->helper('iwd_opc')->__('Please select gender');
+                }
+
+                echo $this->escapeHtml($option['label']); ?>
+            </option>
+        <?php } ?>
+    </select>
+</div>

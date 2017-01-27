@@ -1,74 +1,91 @@
 <?php
-class IWD_Opc_Model_Observer{
-	
-	public function checkRequiredModules($observer){
-		$cache = Mage::app()->getCache();
-		
-		if (Mage::getSingleton('admin/session')->isLoggedIn()) {
-			if (!Mage::getConfig()->getModuleConfig('IWD_All')->is('active', 'true')){
-				if ($cache->load("iwd_opc")===false){
-					$message = 'Important: Please setup IWD_ALL in order to finish <strong>Checkout Suite</strong> installation.<br />
-						Please download <a href="http://iwdextensions.com/media/modules/iwd_all.tgz" target="_blank">IWD_ALL</a> and setup it via Magento Connect.';
-				
-					Mage::getSingleton('adminhtml/session')->addNotice($message);
-					$cache->save('true', 'iwd_opc', array("iwd_opc"), $lifeTime=5);
-				}
-			}
-		}
-	}
-	
-	
-	
-	public function newsletter($observer){
-		$_session = Mage::getSingleton('core/session');
 
-		$newsletterFlag = $_session->getIsSubscribed();
-		if ($newsletterFlag==true){
-			
-			$email = $observer->getEvent()->getOrder()->getCustomerEmail();
-			
-			$subscriber = Mage::getModel('newsletter/subscriber')->loadByEmail($email);
-	        if($subscriber->getStatus() != Mage_Newsletter_Model_Subscriber::STATUS_SUBSCRIBED && $subscriber->getStatus() != Mage_Newsletter_Model_Subscriber::STATUS_UNSUBSCRIBED) {
-	            $subscriber->setImportMode(true)->subscribe($email);
-	            
-	            $subscriber = Mage::getModel('newsletter/subscriber')->loadByEmail($email);
-	            $subscriber->sendConfirmationSuccessEmail();
-	        }
-			
-		}
-		
-	}
-	
-	public function applyComment($observer){
-		$order = $observer->getData('order');
-		
-		$comment = Mage::getSingleton('core/session')->getOpcOrderComment();
-		if (!Mage::helper('opc')->isShowComment() || empty($comment)){
-			return;
-		}
-		try{
-			$order->setCustomerComment($comment);
-			$order->setCustomerNoteNotify(true);
-			$order->setCustomerNote($comment);
-			$order->addStatusHistoryComment($comment)->setIsVisibleOnFront(true)->setIsCustomerNotified(true);
-			$order->save();
-			$order->sendOrderUpdateEmail(true, $comment);
-		}catch(Exception $e){
-			Mage::logException($e);
-		}
-	}
+class IWD_Opc_Model_Observer
+{
+    /**
+     * @return IWD_Opc_Helper_Data
+     */
+    public function getOpcHelper()
+    {
+        return Mage::helper('iwd_opc');
+    }
 
-    public function checkoutCartAddProductComplete($observer){
-        if (!Mage::getStoreConfig('payment/incontext/enable')){
-            return;
-        }
+    /**
+     * @return Mage_Core_Model_Session
+     */
+    public function getCoreSession()
+    {
+        return Mage::getSingleton('core/session');
+    }
 
-        $request = $observer->getRequest();
-        $response = $observer->getRequest();
-        $returnUrl = $request->getParam('return_url', false);
-        if (preg_match('/express\/start/i', $returnUrl)){
-            $request->setParam('return_url', Mage::getUrl('checkout/cart', array('_secure'=>true)));
+    public function checkRequiredModules(Varien_Event_Observer $observer)
+    {
+        if (Mage::getSingleton('admin/session')->isLoggedIn()) {
+            if (!Mage::getConfig()->getModuleConfig('IWD_All')->is('active', 'true')) {
+                $cache = Mage::app()->getCache();
+                if ($cache->load('iwd_opc_message') === false) {
+                    $message = 'Important: Please setup IWD All extension in order to finish 
+                        <strong>Checkout Suite</strong> 
+                        installation.<br />
+						Please download 
+						<a href="http://iwdextensions.com/media/modules/iwd_all.tgz" target="_blank">
+						    IWD All extension
+						</a> and setup it via Magento Connect.';
+                    Mage::getSingleton('adminhtml/session')->addNotice($message);
+                    $cache->save('true', 'iwd_opc_message', array('iwd_opc_message'), $lifeTime = 5);
+                }
+            }
         }
     }
 
+    public function saveNewsletter(Varien_Event_Observer $observer)
+    {
+        $email = $observer->getEvent()->getOrder()->getCustomerEmail();
+        $subscribe = $this->getCoreSession()->getData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_SUBSCRIBE);
+        $subscribeEnabled = $this->getOpcHelper()->isShowSubscribe();
+        if ($subscribe && $email && $subscribeEnabled) {
+            /**
+             * @var $subscribeModel Mage_Newsletter_Model_Subscriber
+             */
+            $subscribeModel = Mage::getModel('newsletter/subscriber');
+            $subscribeModel->loadByEmail($email);
+            if ($subscribeModel->getStatus() != Mage_Newsletter_Model_Subscriber::STATUS_SUBSCRIBED
+                && $subscribeModel->getStatus() != Mage_Newsletter_Model_Subscriber::STATUS_UNSUBSCRIBED
+            ) {
+                $subscribeModel->setImportMode(true)->subscribe($email);
+                $subscribeModel = Mage::getModel('newsletter/subscriber');
+                $subscribeModel->loadByEmail($email);
+                $subscribeModel->sendConfirmationSuccessEmail();
+            }
+        }
+    }
+
+    public function saveComment(Varien_Event_Observer $observer)
+    {
+        $comment = $this->getCoreSession()->getData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_COMMENT, '');
+        $commentEnabled = $this->getOpcHelper()->isShowCommentField();
+        /**
+         * @var $order Mage_Sales_Model_Order
+         */
+        $order = $observer->getEvent()->getOrder();
+        if ($comment && $commentEnabled) {
+            $order->setCustomerComment($comment);
+            $order->setCustomerNoteNotify(false);
+            $order->setCustomerNote($comment);
+            $order->addStatusHistoryComment($comment)
+                ->setIsVisibleOnFront(true)
+                ->setIsCustomerNotified(false);
+            $order->save();
+        }
+    }
+
+    public function clearSession(Varien_Event_Observer $observer)
+    {
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_COMMENT);
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_SUBSCRIBE);
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_FOUNDED_CUSTOMERS);
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_EMAIL);
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_PAYMENT_METHOD_CODE);
+        $this->getCoreSession()->unsetData(IWD_Opc_Helper_Data::IWD_OPC_CUSTOMER_SHIPPING_GROUP);
+    }
 }

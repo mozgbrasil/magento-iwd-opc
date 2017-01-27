@@ -1,0 +1,26 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Paygate_Authorizenet_Info_Cc
+ */
+?>
+<?php
+$cards = $this->getCards();
+$showCount = count($cards) > 1;
+?>
+
+<?php foreach ($cards as $key => $card) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php if ($showCount) { ?>
+            <div class="iwd_opc_authorize_net_label">
+                <?php echo sprintf($this->__('Credit Card %s:'), $key + 1); ?>
+            </div>
+        <?php } ?>
+
+        <?php foreach ($card as $label => $value) { ?>
+            <div class="iwd_opc_authorize_net_cc_row">
+                <div><?php echo $this->escapeHtml($label); ?>:</div>
+                <div><?php echo $this->escapeHtml(nl2br(implode($this->getValueAsArray($value, true), "\n"))); ?></div>
+            </div>
+        <?php } ?>
+    </div>
+<?php } ?>

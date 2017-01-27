@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Widget_Taxvat
+ */
+?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="text"
+           name="<?php echo $this->escapeHtml($this->getFieldName('taxvat')); ?>"
+           value="<?php echo $this->escapeHtml($this->getTaxvat()); ?>"
+           title="<?php echo $this->escapeHtml($this->__('Tax/VAT number')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Tax/VAT number')); ?>"
+           class="iwd_opc_field iwd_opc_input
+            <?php echo $this->escapeHtml($this->helper('customer/address')->getAttributeValidationClass('taxvat')); ?>"
+        <?php echo $this->escapeHtml($this->getFieldParams()); ?> />
+</div>

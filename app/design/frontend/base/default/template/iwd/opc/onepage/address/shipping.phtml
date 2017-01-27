@@ -1,0 +1,203 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Address_Shipping
+ * @var $opcAddressHelper IWD_Opc_Helper_Address
+ */
+$isLoggedIn = $this->isCustomerLoggedIn();
+$customerHasAddress = $this->customerHasAddresses();
+$opcAddressHelper = $this->helper('iwd_opc/address');
+?>
+<?php if ($isLoggedIn && $customerHasAddress) { ?>
+    <div class="iwd_opc_universal_wrapper">
+        <?php echo $this->getAddressHtmlSelect(); ?>
+    </div>
+<?php } ?>
+<div id="iwd_opc_shipping_address_fields"
+    <?php if ($customerHasAddress) { ?>
+        style="display:none;"
+    <?php } ?>
+>
+    <input type="hidden"
+           name="shipping[address_id]"
+           value="<?php echo $this->escapeHtml($this->getAddress()->getId()); ?>"/>
+    <?php echo $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_name')
+        ->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getQuote()->getCustomer())
+        ->setForceUseCustomerRequiredAttributes(!$isLoggedIn)
+        ->setFieldIdFormat('shipping:%s')
+        ->setFieldNameFormat('shipping[%s]')
+        ->toHtml(); ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="shipping[company]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getCompany()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Company')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Company')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('company')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <?php echo $this->getCountrySelect(); ?>
+    </div>
+    <?php $streetValidationClass = $opcAddressHelper->getAttributeValidationClass('street'); ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('Street Address')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Street Address')); ?>"
+               name="shipping[street][]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getStreet(1)); ?>"
+               class="iwd_opc_field iwd_opc_input <?php echo $this->escapeHtml($streetValidationClass); ?>"/>
+    </div>
+    <?php $streetValidationClass = trim(str_replace('required-entry', '', $streetValidationClass)); ?>
+    <?php for ($i = 2, $n = $this->helper('customer/address')->getStreetLines(); $i <= $n; $i++) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="text"
+                   title="<?php echo $this->escapeHtml($this->__('Street Address %s', $i)); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->__('Street Address %s', $i)); ?>"
+                   name="shipping[street][]"
+                   value="<?php echo $this->escapeHtml($this->getAddress()->getStreet($i)); ?>"
+                   class="iwd_opc_field iwd_opc_input <?php echo $this->escapeHtml($streetValidationClass); ?>"/>
+        </div>
+    <?php } ?>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('City')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('City')); ?>"
+               name="shipping[city]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getCity()); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('city')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <select id="shipping:region_id"
+                name="shipping[region_id]"
+                title="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+                class="iwd_opc_field iwd_opc_select"
+                style="display:none;">
+            <option value="">
+                <?php echo $this->escapeHtml($this->__('State or Region')); ?>
+            </option>
+        </select>
+        <script type="text/javascript">
+            //<![CDATA[
+            $('shipping:region_id').setAttribute('defaultValue', "<?php echo $this->escapeHtml(
+                $this->getAddress()->getRegionId()
+            ); ?>");
+            //]]>
+        </script>
+        <input type="text"
+               id="shipping:region"
+               name="shipping[region]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getRegion()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('State/Province')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                    <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('region')); ?>"
+               style="display:none;"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               title="<?php echo $this->escapeHtml($this->__('Zip Code')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Zip Code')); ?>"
+               name="shipping[postcode]"
+               id="shipping:postcode"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getPostcode()); ?>"
+               class="iwd_opc_field iwd_opc_input validate-zip-international
+                    <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('postcode')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="shipping[telephone]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Telephone')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Telephone')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('telephone')); ?>"/>
+    </div>
+    <div class="iwd_opc_universal_wrapper">
+        <input type="text"
+               name="shipping[fax]"
+               value="<?php echo $this->escapeHtml($this->getAddress()->getFax()); ?>"
+               title="<?php echo $this->escapeHtml($this->__('Fax')); ?>"
+               placeholder="<?php echo $this->escapeHtml($this->__('Fax')); ?>"
+               class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('fax')); ?>"/>
+    </div>
+    <?php if ($opcAddressHelper->isVatAttributeVisible()) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <input type="text"
+                   name="shipping[vat_id]"
+                   value="<?php echo $this->escapeHtml($this->getAddress()->getVatId()); ?>"
+                   title="<?php echo $this->escapeHtml($this->__('VAT Number')); ?>"
+                   placeholder="<?php echo $this->escapeHtml($this->__('VAT Number')); ?>"
+                   class="iwd_opc_field iwd_opc_input
+                <?php echo $this->escapeHtml($opcAddressHelper->getAttributeValidationClass('vat_id')); ?>"/>
+        </div>
+    <?php } ?>
+    <?php if (!$isLoggedIn) { ?>
+        <?php $dateOfBirth = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_dob'); ?>
+        <?php $gender = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_gender'); ?>
+        <?php $taxvat = $this->getLayout()->createBlock('iwd_opc/onepage_address_widget_taxvat'); ?>
+        <?php if ($dateOfBirth->isEnabled()) { ?>
+            <?php echo $dateOfBirth
+                ->setDate($this->getQuote()->getCustomerDob())
+                ->setFieldIdFormat('shipping:%s')
+                ->setFieldNameFormat('shipping[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+        <?php if ($gender->isEnabled()) { ?>
+            <?php echo $gender
+                ->setGender($this->getQuote()->getCustomerGender())
+                ->setFieldIdFormat('shipping:%s')
+                ->setFieldNameFormat('shipping[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+        <?php if ($taxvat->isEnabled()) { ?>
+            <?php echo $taxvat
+                ->setTaxvat($this->getQuote()->getCustomerTaxvat())
+                ->setFieldIdFormat('shipping:%s')
+                ->setFieldNameFormat('shipping[%s]')
+                ->toHtml(); ?>
+        <?php } ?>
+    <?php } ?>
+    <div class="iwd_opc_clear"></div>
+    <?php if ($isLoggedIn && $customerHasAddress) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <label class="iwd_opc_checkbox_label" for="shipping:save_in_address_book">
+                <input type="checkbox"
+                       name="shipping[save_in_address_book]"
+                       id="shipping:save_in_address_book"
+                       title="<?php echo $this->escapeHtml($this->__('Save in address book')); ?>"
+                       class="iwd_opc_checkbox iwd_opc_field"
+                       value="1"
+                    <?php if ($this->getAddress()->getSaveInAddressBook()) { ?>
+                        checked="checked"
+                    <?php } ?>
+                />
+                <span class="iwd_opc_checkbox_label_value">
+                    <?php echo $this->escapeHtml($this->__('Save in address book')); ?>
+                </span>
+            </label>
+        </div>
+    <?php } else { ?>
+        <input type="hidden" name="shipping[save_in_address_book]" value="1"/>
+    <?php } ?>
+    <input type="hidden"
+           name="shipping[same_as_billing]"
+           id="shipping:same_as_billing"
+        <?php if ($this->getAddress()->getSameAsBilling() && !$this->helper('iwd_opc')->isShowShippingForm()) { ?>
+            value="1"
+        <?php } else { ?>
+            value="0"
+        <?php } ?>/>
+    <script type="text/javascript">
+        //<![CDATA[
+        var shippingRegionUpdater = new RegionUpdater(
+            'shipping:country_id',
+            'shipping:region',
+            'shipping:region_id',
+            <?php echo $this->jsQuoteEscape($this->helper('directory')->getRegionJson()); ?>,
+            undefined,
+            'shipping:postcode');
+        //]]>
+    </script>
+</div>

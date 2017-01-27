@@ -1,0 +1,73 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Method
+ */
+?>
+<?php
+$methods = $this->getMethods();
+$selectedPaymentMethod = $this->getSelectedMethodCode();
+?>
+<div class="iwd_opc_universal_wrapper iwd_opc_message iwd_opc_section_message error_message" style="display:none;">
+
+</div>
+<form class="iwd_opc_form" id="iwd_opc_payment_method_form">
+    <?php if (empty($methods)) { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <select disabled="disabled"
+                    class="iwd_opc_field iwd_opc_select required-entry"
+                    title="<?php echo $this->escapeHtml($this->__('No Payment Methods')); ?>"
+                    name="iwd_opc_payment_method_unavailable">
+                <option value=""><?php echo $this->escapeHtml($this->__('No Payment Methods')); ?></option>
+            </select>
+        </div>
+    <?php } else { ?>
+        <div class="iwd_opc_universal_wrapper">
+            <select
+                    id="iwd_opc_payment_method_select"
+                    class="required-entry iwd_opc_field iwd_opc_select"
+                    name="payment[method]"
+                    title="<?php echo $this->escapeHtml($this->__('Select Payment Method')); ?>">
+                <option></option>
+                <?php foreach ($methods as $method) {
+                    $code = $method->getCode(); ?>
+                    <option
+                            data-image="<?php echo $this->getMethodLogo($method); ?>"
+                        <?php if ($selectedPaymentMethod == $code) { ?>
+                            selected="selected"
+                        <?php } ?>
+                            value="<?php echo $this->escapeHtml($code); ?>">
+                        <?php echo $this->getMethodTitle($method); ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="iwd_opc_payment_method_forms">
+            <?php foreach ($methods as $method) {
+                $code = $method->getCode(); ?>
+                <?php if ($html = $this->getPaymentMethodFormHtml($method)) { ?>
+                    <div class="iwd_opc_payment_method_form"
+                        <?php if ($selectedPaymentMethod != $code) { ?>
+                            style="display:none;"
+                        <?php } ?>
+                         data-payment-method-code="<?php echo $this->escapeHtml($code); ?>">
+                        <?php echo $html; ?>
+                    </div>
+                <?php } ?>
+            <?php } ?>
+        </div>
+    <?php } ?>
+</form>
+<script type="text/javascript">
+    var iwdOpcPaymentMethodForm = new VarienForm('iwd_opc_payment_method_form');
+    iwdOpcPaymentMethodForm.validator.options = {
+        onSubmit: false,
+        stopOnFirst: false,
+        immediate: false,
+        focusOnError: false,
+        useTitles: false,
+        onFormValidate: function (result, form) {
+        },
+        onElementValidate: function (result, elm) {
+        }
+    };
+</script>

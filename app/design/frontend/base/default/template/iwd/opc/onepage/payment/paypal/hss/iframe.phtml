@@ -1,0 +1,12 @@
+<?php
+/** @var $this Mage_Paypal_Block_Payflow_Link_Iframe */
+?>
+<iframe id="hss-iframe" style="display:none;" scrolling="auto" frameborder="0" border="0"
+        src="<?php echo $this->escapeHtml($this->getFrameActionUrl()); ?>" height="610" width="490px"></iframe>
+<script type="text/javascript">
+    //<![CDATA[
+    $('hss-iframe').observe('load', function () {
+        $('hss-iframe').show();
+    });
+    //]]>
+</script>

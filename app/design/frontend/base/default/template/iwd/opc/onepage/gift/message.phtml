@@ -1,0 +1,203 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Gift_Message
+ */
+?>
+<?php if ($this->isMessagesAvailable() || $this->isItemsAvailable()) {
+    $entityHasMessages = $this->getEntityHasMessage();
+    $itemsHasMessages = $this->getItemsHasMesssages();
+    ?>
+    <form class="iwd_opc_form" id="iwd_opc_gift_message_form">
+        <div class="iwd_opc_universal_wrapper">
+            <label for="allow_gift_messages"
+                   title="<?php echo $this->escapeHtml($this->__('Is this a gift?')); ?>"
+                   class="iwd_opc_checkbox_label">
+                <input type="checkbox"
+                       name="allow_gift_messages"
+                       id="allow_gift_messages"
+                       value="1"
+                    <?php if ($itemsHasMessages || $entityHasMessages) { ?>
+                        checked="checked"
+                    <?php } ?>
+                       class="iwd_opc_checkbox iwd_opc_field"/>
+                <span class="iwd_opc_checkbox_label_value">
+                    <?php echo $this->escapeHtml($this->__('Is this a gift?')); ?>
+                </span>
+            </label>
+        </div>
+        <div id="iwd_opc_gift_message_types"
+            <?php if ($itemsHasMessages || $entityHasMessages) { ?>
+                class="selected"
+            <?php } else { ?>
+                style="display:none;"
+            <?php } ?>
+        >
+            <div class="iwd_opc_section_delimiter"></div>
+            <?php if ($this->isMessagesAvailable()) { ?>
+                <div class="iwd_opc_universal_wrapper">
+                    <label for="allow_gift_messages_for_order"
+                           title="<?php echo $this->escapeHtml($this->__('Gift Entire Order')); ?>"
+                           class="iwd_opc_checkbox_label">
+                        <input type="checkbox"
+                               name="iwd_opc_gift_message_type_checkbox"
+                               id="allow_gift_messages_for_order"
+                               value="1"
+                            <?php if ($entityHasMessages) { ?>
+                                checked="checked"
+                            <?php } ?>
+                               class="iwd_opc_checkbox iwd_opc_field iwd_opc_gift_message_type_checkbox
+                                validate-one-required-by-name"/>
+                        <span class="iwd_opc_checkbox_label_value">
+                            <?php echo $this->escapeHtml($this->__('Gift Entire Order')); ?>
+                        </span>
+                    </label>
+                </div>
+                <div class="iwd_opc_gift_message_type <?php if ($entityHasMessages) { ?> selected <?php } ?>"
+                    <?php if (!$entityHasMessages) { ?> style="display: none;" <?php } ?>
+                     data-type="allow_gift_messages_for_order">
+                    <input type="hidden" name="allow_gift_messages_for_order" value="1"/>
+                    <div class="iwd_opc_section_delimiter"></div>
+                    <input type="hidden"
+                           name="giftmessage[<?php echo $this->escapeHtml($this->getEntity()->getId()); ?>][type]"
+                           value="quote"/>
+                    <div class="iwd_opc_universal_wrapper">
+                        <input type="text"
+                               name="giftmessage[<?php echo $this->escapeHtml($this->getEntity()->getId()); ?>][from]"
+                               title="<?php echo $this->escapeHtml($this->__('From')); ?>"
+                               placeholder="<?php echo $this->escapeHtml($this->__('From')); ?>"
+                               value="<?php echo $this->getEscaped(
+                                   $this->getMessage()->getSender(), $this->getDefaultFrom()
+                               ); ?>"
+                               class="iwd_opc_field required-entry iwd_opc_input"/>
+                    </div>
+                    <div class="iwd_opc_universal_wrapper">
+                        <input type="text"
+                               name="giftmessage[<?php echo $this->escapeHtml($this->getEntity()->getId()); ?>][to]"
+                               title="<?php echo $this->escapeHtml($this->__('To')); ?>"
+                               placeholder="<?php echo $this->escapeHtml($this->__('To')); ?>"
+                               value="<?php echo $this->getEscaped(
+                                   $this->getMessage()->getRecipient(), $this->getDefaultTo()
+                               ); ?>"
+                               class="iwd_opc_field required-entry iwd_opc_input"/>
+                    </div>
+                    <div class="iwd_opc_universal_wrapper">
+                    <textarea name="giftmessage[<?php echo $this->escapeHtml($this->getEntity()->getId()); ?>][message]"
+                              title="<?php echo $this->escapeHtml($this->__('Message')); ?>"
+                              placeholder="<?php echo $this->escapeHtml($this->__('Message')); ?>"
+                              rows="1"
+                              class="iwd_opc_field required-entry iwd_opc_textarea"><?php echo $this->getEscaped(
+                            $this->getMessage()->getMessage()
+                        ); ?></textarea>
+                    </div>
+                    <?php if ($this->isItemsAvailable()) { ?>
+                        <div class="iwd_opc_section_delimiter"></div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            <?php if ($this->isItemsAvailable()) { ?>
+                <div class="iwd_opc_universal_wrapper">
+                    <label for="allow_gift_messages_for_items"
+                           title="<?php echo $this->escapeHtml($this->__('Gift Individual Items')); ?>"
+                           class="iwd_opc_checkbox_label">
+                        <input type="checkbox"
+                               name="iwd_opc_gift_message_type_checkbox"
+                               id="allow_gift_messages_for_items"
+                               value="1"
+                            <?php if ($itemsHasMessages) { ?>
+                                checked="checked"
+                            <?php } ?>
+                               class="iwd_opc_checkbox iwd_opc_field iwd_opc_gift_message_type_checkbox
+                               validate-one-required-by-name"/>
+                        <span class="iwd_opc_checkbox_label_value">
+                        <?php echo $this->escapeHtml($this->__('Gift Individual Items')); ?>
+                    </span>
+                    </label>
+                </div>
+                <div class="iwd_opc_gift_message_type <?php if ($itemsHasMessages) { ?> selected <?php } ?>"
+                    <?php if (!$itemsHasMessages) { ?> style="display: none;" <?php } ?>
+                     data-type="allow_gift_messages_for_items">
+                    <input type="hidden" name="allow_gift_messages_for_items" value="1"/>
+                    <div class="iwd_opc_section_delimiter"></div>
+                    <?php foreach ($this->getItems() as $index => $item) {
+                        $product = $item->getProduct(); ?>
+                        <input type="hidden" name="giftmessage[<?php echo $item->getId() ?>][type]" value="quote_item"/>
+                        <div class="iwd_opc_universal_wrapper">
+                            <label for="giftmessage_<?php echo $item->getId(); ?>_type"
+                                   title="<?php echo $this->escapeHtml($product->getName()); ?>"
+                                   class="iwd_opc_checkbox_label">
+                                <input type="checkbox"
+                                       id="giftmessage_<?php echo $item->getId(); ?>_type"
+                                       value="1"
+                                    <?php if ($item->getGiftMessageId()) { ?>
+                                        checked="checked"
+                                    <?php } ?>
+                                       name="iwd_opc_gift_message_item_checkbox"
+                                       class="iwd_opc_checkbox iwd_opc_field iwd_opc_gift_message_item_checkbox
+                                       validate-one-required-by-name"/>
+                                <span class="iwd_opc_checkbox_label_value">
+                                <?php echo $this->escapeHtml($product->getName()); ?>
+                            </span>
+                            </label>
+                        </div>
+                        <div data-gift-item="giftmessage_<?php echo $item->getId(); ?>_type"
+                            <?php if (!$item->getGiftMessageId()) { ?> style="display: none;" <?php } ?>
+                             class="iwd_opc_gift_message_quote_item
+                            <?php if ($item->getGiftMessageId()) { ?>
+                                selected
+                            <?php } ?>">
+                            <div class="iwd_opc_universal_wrapper">
+                                <input type="text"
+                                       name="giftmessage[<?php echo $item->getId(); ?>][from]"
+                                       title="<?php echo $this->escapeHtml($this->__('From')); ?>"
+                                       placeholder="<?php echo $this->escapeHtml($this->__('From')); ?>"
+                                       value="<?php echo $this->getEscaped(
+                                           $this->getMessage($item)->getSender(),
+                                           $this->getDefaultFrom()
+                                       ); ?>"
+                                       class="iwd_opc_field required-entry iwd_opc_input"/>
+                            </div>
+                            <div class="iwd_opc_universal_wrapper">
+                                <input type="text"
+                                       name="giftmessage[<?php echo $item->getId(); ?>][to]"
+                                       title="<?php echo $this->escapeHtml($this->__('To')); ?>"
+                                       placeholder="<?php echo $this->escapeHtml($this->__('To')); ?>"
+                                       value="<?php echo $this->getEscaped(
+                                           $this->getMessage($item)->getRecepient(),
+                                           $this->getDefaultTo()
+                                       ); ?>"
+                                       class="iwd_opc_field required-entry iwd_opc_input"/>
+                            </div>
+                            <div class="iwd_opc_universal_wrapper">
+                                <textarea name="giftmessage[<?php echo $item->getId(); ?>][message]"
+                                          title="<?php echo $this->escapeHtml($this->__('Message')); ?>"
+                                          placeholder="<?php echo $this->escapeHtml($this->__('Message')); ?>"
+                                          class="iwd_opc_field required-entry iwd_opc_textarea"
+                                          rows="1"><?php echo $this->getEscaped(
+                                        $this->getMessage($item)->getMessage()
+                                    ); ?></textarea>
+                            </div>
+                            <?php if (($index + 1) != count($this->getItems())) { ?>
+                                <div class="iwd_opc_section_delimiter"></div>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
+    </form>
+    <script type="text/javascript">
+        var iwdOpcGiftMessageForm = new VarienForm('iwd_opc_gift_message_form');
+        iwdOpcGiftMessageForm.validator.options = {
+            onSubmit: false,
+            stopOnFirst: false,
+            immediate: false,
+            focusOnError: false,
+            useTitles: false,
+            onFormValidate: function (result, form) {
+            },
+            onElementValidate: function (result, elm) {
+            }
+        };
+    </script>
+<?php } ?>
+

@@ -1,0 +1,53 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Login
+ */
+?>
+<?php
+$allowGuestCheckout = Mage::helper('checkout')->isAllowedGuestCheckout(
+    $this->getQuote(), $this->getQuote()->getStoreId()
+);
+?>
+<div class="iwd_opc_universal_wrapper">
+    <input type="email"
+           title="<?php echo $this->escapeHtml($this->__('Email')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Email')); ?>"
+           name="billing[email]"
+           value="<?php echo $this->escapeHtml($this->getEmail()); ?>"
+           class="iwd_opc_field iwd_opc_input required-entry validate-email"/>
+</div>
+<div id="iwd_opc_login_password" class="iwd_opc_universal_wrapper"
+    <?php if (!$this->isEmailFounded()) { ?>
+        style="display: none;"
+    <?php } ?>
+>
+    <input type="password"
+           title="<?php echo $this->escapeHtml($this->__('Password')); ?>"
+           placeholder="<?php echo $this->escapeHtml($this->__('Password')); ?>"
+           name="billing[login_password]"
+           autocomplete="new-password"
+           value=""
+           class="iwd_opc_field iwd_opc_input
+            <?php if ($this->isEmailFounded()) { ?>
+                validate-password
+            <?php } ?>"/>
+    <span title="<?php echo $this->escapeHtml($this->__('Show/Hide password')); ?>"
+          class="iwd_opc_show_hide_password active"></span>
+</div>
+<div id="iwd_opc_login_buttons" class="iwd_opc_universal_wrapper iwd_opc_small_button_container"
+    <?php if (!$this->isEmailFounded()) { ?>
+        style="display: none;"
+    <?php } ?>
+>
+    <button type="button" id="iwd_opc_login_button" class="iwd_opc_small_button active"
+            title="<?php echo $this->escapeHtml($this->__('Login')); ?>">
+        <?php echo $this->escapeHtml($this->__('Login')); ?>
+    </button>
+    <button type="button" id="iwd_opc_reset_password_button" class="iwd_opc_small_button active"
+            title="<?php echo $this->escapeHtml($this->__('Reset')); ?>">
+        <?php echo $this->escapeHtml($this->__('Reset')); ?>
+    </button>
+</div>
+<div class="iwd_opc_universal_wrapper iwd_opc_message" style="display:none;">
+
+</div>

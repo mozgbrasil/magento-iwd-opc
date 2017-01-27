@@ -1,0 +1,30 @@
+<?php
+/**
+ * @var $this IWD_Opc_Block_Onepage_Payment_Paypal_Express_Button
+ */
+?>
+<?php
+$shortcutHtmlId = $this->getShortcutHtmlId();
+$bmlShortcutHtmlId = $this->getBmlShortcutHtmlId();
+?>
+<div class="iwd_opc_top_button">
+    <div title="<?php echo $this->escapeHtml($this->__('Checkout with PayPal')); ?>"
+         data-url="<?php echo $this->escapeHtml(
+             ($this->getConfirmationUrl() ? $this->getConfirmationUrl() : $this->getCheckoutUrl())
+         ); ?>"
+         data-confirmation="<?php echo $this->escapeHtml(
+             ($this->getConfirmationUrl() ? $this->getConfirmationMessage() : '')
+         ); ?>"
+         id="<?php echo $this->escapeHtml($shortcutHtmlId); ?>"
+         class="iwd_opc_top_button_paypal iwd_opc_top_button_paypal_express">
+    </div>
+</div>
+<?php if ($this->getIsBmlEnabled()) { ?>
+    <div class="iwd_opc_top_button">
+        <div title="<?php echo $this->escapeHtml($this->__('Checkout with PayPal Bill Me Later')); ?>"
+             data-url="<?php echo $this->escapeHtml($this->getBmlCheckoutUrl()); ?>"
+             id="<?php echo $this->escapeHtml($bmlShortcutHtmlId); ?>"
+             class="iwd_opc_top_button_paypal iwd_opc_top_button_paypal_bml">
+        </div>
+    </div>
+<?php } ?>
