@@ -28,6 +28,6 @@
         "rss": "https://mozg.com.br/feed.xml"
     },
     "require" : {
-        "mozgbrasil/magento-iwd-all": "1.2.2"
+        "mozgbrasil/magento-iwd-all": "dev-master"
     }
 }
