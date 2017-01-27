@@ -12,6 +12,8 @@ Checkout da compra em 1 passo para Magento
 
 ## Motivação
 
+Automação para a instalação do módulo
+
 Para mais informações, visite 
 
 https://www.iwdagency.com/extensions/one-step-page-checkout.html
@@ -48,7 +50,7 @@ Para qualquer atualização no Magento sempre mantenha o Compiler e o Cache desa
 
 ### Para instalar o módulo execute o comando a seguir no terminal do seu servidor
 
-	composer require mozgbrasil/magento-iwd-opc
+	composer require mozgbrasil/magento-iwd-opc:dev-master
 
 Você pode verificar se o módulo está instalado, indo ao backend em:
 
