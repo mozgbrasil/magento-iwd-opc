@@ -1,5 +1,6 @@
 [checkmark]: https://raw.githubusercontent.com/mozgbrasil/mozgbrasil.github.io/master/assets/images/logos/Red_star_32_32.png "MOZG"
 ![valid XHTML][checkmark]
+
 [psr4]: http://www.php-fig.org/psr/psr-4/
 [getcomposer]: https://getcomposer.org/
 [uninstall-mods]: https://getcomposer.org/doc/03-cli.md#remove
