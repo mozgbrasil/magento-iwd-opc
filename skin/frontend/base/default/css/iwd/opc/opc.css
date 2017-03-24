@@ -272,7 +272,8 @@
 .opc-wrapper-opc .payment-block input[name="payment[cc_cid]"] { max-width: 61px;}
 .opc-wrapper-opc .payment-block input[name="payment[cc_number]"] { margin-bottom:9px;}
 .opc-wrapper-opc .payment-block select[name="payment[cc_exp_month]"] { margin-bottom:7px;}
-.opc-wrapper-opc .payment-block .cc-cid-placeholder{  position: absolute;left: 61px; top: 0;background-image: url("images/opc_cc.png"); background-position: 113px 0px;  display: inline-block; height: 34px; vertical-align: top;width: 53px; margin-left: 9px;}
+/*.opc-wrapper-opc .payment-block .cc-cid-placeholder{  position: absolute;left: 61px; top: 0;background-image: url("images/opc_cc.png"); background-position: 113px 0px;  display: inline-block; height: 34px; vertical-align: top;width: 53px; margin-left: 9px;}*/
+.opc-wrapper-opc .payment-block .cc-cid-placeholder{  position: absolute;left: 61px; top: 0;background-image: url("images/opc_cc.png"); background-position: -487px 0px;  display: inline-block; height: 34px; vertical-align: top;width: 53px; margin-left: 9px;}
 .opc-wrapper-opc .payment-block .ssl-placeholder{ width: 111px; height: 57px; display: block;  position: relative; float:right;right: -25px;margin-top: -12px; background-image: url("images/opc_cc.png"); background-position: 111px -35px;}
 
 /** GIFT SHIPPING METHODS BLOCK **/
