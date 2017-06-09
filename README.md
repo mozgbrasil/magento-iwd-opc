@@ -37,11 +37,28 @@ Autoloading compatível é [PSR-4][psr4]
 
 --
 
-Certique se da existencia do arquivo composer.json na raiz do projeto Magento e que o mesmo tenha os trechos "minimum-stability", "prefer-stable", "repositories" e '"magento-root-dir":"./"', conforme https://gist.github.com/mozgbrasil/0c9bb8792ea6273ea24aed30b0fbcfba
+Certique se da presença do arquivo composer.json na raiz do seu projeto Magento e que o mesmo tenha os parâmetros semelhantes ao modelo JSON abaixo
 
-Caso não exista o arquivo composer.json na raiz do projeto Magento, efetue o download
+	{
+	  "minimum-stability": "dev",
+	  "prefer-stable": true,
+	  "license": [
+	    "proprietary"
+	  ],
+	  "repositories": [
+	    {
+	      "type": "composer",
+	      "url": "https?://packages.firegento.com"
+	    }
+	  ],
+	  "extra": {
+	    "magento-root-dir": "./",
+	    "magento-deploystrategy": "copy",
+	    "magento-force": true
+	  }
+	}
 
-	wget https://gist.githubusercontent.com/mozgbrasil/0c9bb8792ea6273ea24aed30b0fbcfba/raw/b53c403620c111c43834fec9aa025809d1cb96b1/composer.json
+Caso não exista o arquivo composer.json na raiz do projeto Magento, crie o mesmo adicionado o conteúdo acima
 
 --
 
