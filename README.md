@@ -96,9 +96,11 @@ Para checar a data do módulo execute o seguinte comando
 
 ### Para desativar o módulo
 
-Renomeie a pasta do módulo
+1. Antes de efetuar qualquer processo que envolva atualização sobre o Magento é necessário manter o Compiler e Cache desativado
 
-Cada módulo tem a sua pasta no diretório /vendor/mozgbrasil/
+2. Caso queira desativar os módulos da MOZG renomeie a seguinte pasta app/code/local/Mozg
+
+A desativação do módulo pode ser usado para detectar se determinada ocorrência tem relação com o módulo
 
 --
 
