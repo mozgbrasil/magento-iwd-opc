@@ -98,7 +98,7 @@ Para checar a data do módulo execute o seguinte comando
 
 1. Antes de efetuar qualquer processo que envolva atualização sobre o Magento é necessário manter o Compiler e Cache desativado
 
-2. Caso queira desativar os módulos da MOZG renomeie a seguinte pasta app/code/local/Mozg
+2. Caso queira desativar os módulos da MOZG renomeie a seguinte pasta app/code/community/IWD
 
 A desativação do módulo pode ser usado para detectar se determinada ocorrência tem relação com o módulo
 
