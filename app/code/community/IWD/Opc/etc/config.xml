@@ -236,6 +236,7 @@
     		<global>
     			<title>Onepage Checkout</title>
     			<status>1</status>
+                <jquery>0</jquery>
     		</global>
     		<default>
     			<shipping>freeshipping_freeshipping</shipping>
