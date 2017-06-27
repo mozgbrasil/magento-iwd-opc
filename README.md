@@ -5,7 +5,7 @@
 [getcomposer]: https://getcomposer.org/
 [uninstall-mods]: https://getcomposer.org/doc/03-cli.md#remove
 
-# Mozg\IWD_Opc
+# IWD\Opc
 
 ## Sinopse
 
