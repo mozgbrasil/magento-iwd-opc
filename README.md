@@ -62,7 +62,7 @@ Caso não exista o arquivo composer.json na raiz do projeto Magento, crie o mesm
 
 --
 
-Para qualquer atualização no Magento sempre mantenha o Compiler e o Cache desativado
+Antes de efetuar qualquer atualização no Magento sempre mantenha o Compiler e o Cache desativado
 
 --
 
