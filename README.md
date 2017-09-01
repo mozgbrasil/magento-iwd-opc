@@ -31,9 +31,27 @@ Para obter o devido suporte entre em contato com a desenvolvedora do módulo
 
 ## Instalação - Atualização - Desinstalação - Desativação
 
-Esta biblioteca destina-se a ser instalado usando o [Composer][getcomposer].
+--
 
-Autoloading compatível é [PSR-4][psr4]
+Este módulo destina-se a ser instalado usando o [Composer][getcomposer]
+
+Execute o seguinte comando no terminal, para visualizar a existencia do Composer e sua versão
+
+	composer --version
+
+Caso não tenha o Composer em seu ambiente, sugiro ler o seguinte artigo [Clique aqui][artigo-composer]
+
+--
+
+Sugiro manter um ambiente de testes para efeito de testes e somente após os devidos testes aplicar os devidos procedimento no ambiente de produção
+
+--
+
+Sugiro efetuar backup da plataforma Magento e do banco de dados
+
+--
+
+Antes de efetuar qualquer atualização no Magento sempre mantenha o Compiler e o Cache desativado
 
 --
 
@@ -59,12 +77,6 @@ Certique se da presença do arquivo composer.json na raiz do seu projeto Magento
 	}
 
 Caso não exista o arquivo composer.json na raiz do projeto Magento, crie o mesmo adicionado o conteúdo acima
-
---
-
-Antes de efetuar qualquer atualização no Magento sempre mantenha o Compiler e o Cache desativado
-
---
 
 ### Para instalar o módulo execute o comando a seguir no terminal do seu servidor
 
