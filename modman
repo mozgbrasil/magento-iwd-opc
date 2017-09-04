@@ -3,7 +3,7 @@ app/code/community/IWD/	app/code/community/IWD/
 app/design/adminhtml/default/default/layout/iwd_opc.xml	app/design/adminhtml/default/default/layout/iwd_opc.xml
 app/design/adminhtml/default/default/template/iwd/	app/design/adminhtml/default/default/template/iwd/
 app/design/frontend/base/default/layout/iwd_opc.xml	app/design/frontend/base/default/layout/iwd_opc.xml
-app/design/frontend/base/default/template/iwd/	app/design/frontend/base/default/template/iwd/
+app/design/frontend/base/default/template/opc/	app/design/frontend/base/default/template/opc/
 app/etc/modules/IWD_Opc.xml	app/etc/modules/IWD_Opc.xml
 app/locale/de_DE/IWD_Opc.csv	app/locale/de_DE/IWD_Opc.csv
 app/locale/en_US/IWD_Opc.csv	app/locale/en_US/IWD_Opc.csv
