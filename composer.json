@@ -25,7 +25,7 @@
         "irc": "irc://irc.freenode.org/mozgbrasil",
         "source": "https://github.com/mozgbrasil/magento-iwd-opc",
         "docs": "https://github.com/mozgbrasil/magento-iwd-opc/wiki",
-        "rss": "https://mozg.com.br/feed.xml"
+        "rss": "http://mozg.com.br/sitemap.xml"
     },
     "require" : {
         "mozgbrasil/magento-iwd-all": "dev-master"
