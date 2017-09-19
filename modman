@@ -1,7 +1,7 @@
 ## Modman Module Mozg
-app/code/community/IWD/	app/code/community/IWD/
+app/code/community/IWD/Opc/	app/code/community/IWD/Opc/
 app/design/adminhtml/default/default/layout/iwd_opc.xml	app/design/adminhtml/default/default/layout/iwd_opc.xml
-app/design/adminhtml/default/default/template/iwd/	app/design/adminhtml/default/default/template/iwd/
+app/design/adminhtml/default/default/template/iwd/opc/	app/design/adminhtml/default/default/template/iwd/opc/
 app/design/frontend/base/default/layout/iwd_opc.xml	app/design/frontend/base/default/layout/iwd_opc.xml
 app/design/frontend/base/default/template/opc/	app/design/frontend/base/default/template/opc/
 app/etc/modules/IWD_Opc.xml	app/etc/modules/IWD_Opc.xml
@@ -11,6 +11,6 @@ app/locale/nl_NL/IWD_Opc.csv	app/locale/nl_NL/IWD_Opc.csv
 app/locale/pt_BR/IWD_Opc.csv	app/locale/pt_BR/IWD_Opc.csv
 app/locale/ru_RU/IWD_Opc.csv	app/locale/ru_RU/IWD_Opc.csv
 js/iwd/opc/                                    js/iwd/opc/
-skin/adminhtml/default/default/iwd/	skin/adminhtml/default/default/iwd/
-skin/frontend/base/default/css/iwd/	skin/frontend/base/default/css/iwd/
-skin/frontend/base/default/js/iwd/	skin/frontend/base/default/js/iwd/
+skin/adminhtml/default/default/iwd/opc/	skin/adminhtml/default/default/iwd/opc/
+skin/frontend/base/default/css/iwd/opc/	skin/frontend/base/default/css/iwd/opc/
+skin/frontend/base/default/js/iwd/opc/	skin/frontend/base/default/js/iwd/opc/
