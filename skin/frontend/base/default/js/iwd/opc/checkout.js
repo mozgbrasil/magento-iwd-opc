@@ -516,6 +516,10 @@ IWD.OPC = {
 
     /** CHECK RESPONSE FROM AJAX AFTER SAVE ORDER **/
     prepareOrderResponse: function (response) {
+
+        console.log('#### iwd-checkout');
+        console.log(response);
+
         IWD.OPC.Checkout.xhr = null;
         if (typeof(response.error) != "undefined" && response.error != false) {
             IWD.OPC.Checkout.hideLoader();

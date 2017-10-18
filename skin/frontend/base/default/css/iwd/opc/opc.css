@@ -44,7 +44,7 @@
 .opc-wrapper-opc .opc-login-trigger:hover{color:#fff !important;; background:#39b9c6 !important;cursor:pointer;}
 
 .left{float:left !important;}
-.right{float:right !important;}	
+.right{float:right !important;}
 .clear{clear:both !important;}
 .hidden{display:none !important;}
 .move-columns{margin-bottom:15px;}
@@ -79,18 +79,18 @@
 .opc-wrapper-opc h2{color:#4a4a4a; font-size:36px; font-weight:400;text-align:left;text-transform:none !important}
 .opc-wrapper-opc p{font-size:16px; color:#393939;text-align:left;margin: 0 0 10px;}
 .opc-wrapper-opc input{box-shadow:none;background: none;float: none !important;margin-left: 0 !important;margin-right: 0 !important;}
-.opc-wrapper-opc input, 
+.opc-wrapper-opc input,
 .opc-wrapper-opc select{color:#000;}
 .opc-wrapper-opc select:invalid{color: #5c5c5c;box-shadow:none;}
 .opc-wrapper-opc input:focus{box-shadow:none;}
-.opc-wrapper-opc .opc-col-left{float:left;width:36%;margin:0;padding-right:20px;box-sizing: border-box;} 
-.opc-wrapper-opc .opc-col-center{float:left;width:32%;margin:0;padding-right:20px;padding-left:20px;box-sizing: border-box;} 
-.opc-wrapper-opc .opc-col-right{float:left;width: 32%;margin:0;padding-left:20px;box-sizing: border-box;} 
+.opc-wrapper-opc .opc-col-left{float:left;width:36%;margin:0;padding-right:20px;box-sizing: border-box;}
+.opc-wrapper-opc .opc-col-center{float:left;width:32%;margin:0;padding-right:20px;padding-left:20px;box-sizing: border-box;}
+.opc-wrapper-opc .opc-col-right{float:left;width: 32%;margin:0;padding-left:20px;box-sizing: border-box;}
 
 .opc-wrapper-opc a:hover{color:#00909e;}
 .opc-wrapper-opc input.input-text:focus, .opc-wrapper-opc select:focus, .opc-wrapper-opc  textarea:focus {background-color: #fff;}
 .opc-wrapper-opc span.validation-passed, .opc-wrapper-opc div.validation-passed{background-image:none}
-.opc-wrapper-opc label.required:after, 
+.opc-wrapper-opc label.required:after,
 .opc-wrapper-opc span.required:after{color:#dc0000;font-size: 12px;font-weight: 600;}
 .opc-wrapper-opc .validation-advice{color: #dc0000 !important;font-size: 11px;margin-top: 0;}
 
@@ -163,7 +163,7 @@
 .opc-wrapper-opc .payment-block dt.active{background:#39b9c6;}
 .opc-wrapper-opc .payment-block dt label{color: #ffffff;cursor: pointer;display: block;font-size: 18px;font-weight: bold;height: 41px;line-height: 41px;max-width: 100%;text-align: center;text-transform: uppercase;width: 100%; padding: 2px 0 0 0 !important}
 .opc-wrapper-opc .payment-block select{padding:0;border: 1px solid #d8d8d8;margin-top: 0;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;height:34px;width:100%}
-.opc-wrapper-opc .payment-block dt input{display:block;position:absolute;height:44px; width:100%;left:0;top:0; opacity:0;cursor:pointer;margin:0 !important;display:none;}
+.opc-wrapper-opc .payment-block dt input{display:block;position:absolute;height:44px; width:100%;left:0;top:0; opacity:0;cursor:pointer;margin:0 !important;-moz-opacity:0;filter:alpha(opacity:0);opacity:0;}
 .opc-wrapper-opc .payment-block h3{margin-bottom:26px;}
 .opc-wrapper-opc .payment-block li{margin-bottom:12px;}
 .opc-wrapper-opc .payment-block .form-list{padding-left:0}
@@ -241,7 +241,7 @@
 .opc-wrapper-opc .opc-cc-list li.OT{background-position: -240px 0 }
 
 
-.opc-wrapper-opc .opc-cc-list li.active, 
+.opc-wrapper-opc .opc-cc-list li.active,
 .opc-wrapper-opc .opc-cc-list li:hover{background-position: -240px -57px }
 .opc-wrapper-opc .opc-cc-list li.AE.active,
 .opc-wrapper-opc .opc-cc-list li.AE:hover,
@@ -370,7 +370,7 @@
 .opc-wrapper-opc .gift-messages-form .item .details .form-list .input-box {/*width:170px;*/width:100%;padding:0}
 .opc-wrapper-opc .gift-messages-form .item .details .form-list li.wide .input-box {/*width:168px;*/width:100%;padding:0}
 .opc-wrapper-opc .gift-messages-form .item .details .form-list textarea{border:1px solid #d8d8d8; height:80px;padding:0;/*width:163px;*/width:100%}
-.opc-wrapper-opc .gift-messages-form .item .details .form-list li.wide  textarea{border:1px solid #d8d8d8; height:80px;padding:0;/*width:167px;*/ width:100%} 
+.opc-wrapper-opc .gift-messages-form .item .details .form-list li.wide  textarea{border:1px solid #d8d8d8; height:80px;padding:0;/*width:167px;*/ width:100%}
 .opc-wrapper-opc .gift-messages-form .item .details .form-list .input-box{/*width:170px;*/width:100%}
 .opc-wrapper-opc .gift-messages-form .item .details .form-list input[type="text"]{/*width:163px;*/width:100%}
 .opc-wrapper-opc .gift-messages-form .item .number{font-weight:normal}
@@ -434,10 +434,10 @@
 
 
 
-#p_method_paypal_express +label img, 
+#p_method_paypal_express +label img,
 #p_method_paypal_express +label a{display:none}
 
-#p_method_paypal_standard +label img, 
+#p_method_paypal_standard +label img,
 #p_method_paypal_standard +label a{display:none}
 
 
@@ -552,4 +552,3 @@
 	.opc-wrapper-opc .payment-block select{box-sizing: border-box !important}
 	.opc-wrapper-opc .opc-menu .paypal-logo{margin:0 0 10px;}
 }
-	

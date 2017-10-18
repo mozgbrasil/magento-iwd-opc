@@ -18,7 +18,7 @@ Checkout da compra em 1 passo para Magento
 
 Automação para a instalação do módulo
 
-Para mais informações, visite 
+Para mais informações, visite
 
 https://www.iwdagency.com/extensions/one-step-page-checkout.html
 
@@ -144,6 +144,32 @@ Você precisa ativar a opção "extra.magento-force" no arquivo composer.json
 Dessa forma será forçado a instalação do módulo, sobreescrevendo os arquivos
 
 Fonte: <a href="https://mage2.pro/t/topic/42">https://mage2.pro/t/topic/42</a>
+
+### FIX: IE 8
+
+Não estava funcionando a seleção do radio quando clicado no label
+
+Encontrei a solução abaixo em
+
+https://stackoverflow.com/questions/1252690/ie-hidden-radio-button-not-checked-when-the-corresponding-label-is-clicked
+
+	FIX:
+		Replace
+			style="display:none;"
+		with
+			style="-moz-opacity:0;filter:alpha(opacity:0);opacity:0;"
+
+Alterado o CSS
+
+/skin/frontend/base/default/css/iwd/opc/opc.css
+
+DE
+
+.opc-wrapper-opc .payment-block dt input{display:block;position:absolute;height:44px; width:100%;left:0;top:0; opacity:0;cursor:pointer;margin:0 !important;display:none;}
+
+Para
+
+.opc-wrapper-opc .payment-block dt input{display:block;position:absolute;height:44px; width:100%;left:0;top:0; opacity:0;cursor:pointer;margin:0 !important;-moz-opacity:0;filter:alpha(opacity:0);opacity:0;}
 
 ## Badges
 
