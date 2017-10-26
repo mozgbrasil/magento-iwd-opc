@@ -20,7 +20,7 @@ Automação para a instalação do módulo
 
 Para mais informações, visite
 
-https://www.iwdagency.com/extensions/one-step-page-checkout.html
+https://www.iwdagency.com/extensions/magento-1-one-page-checkout-suite.html
 
 Note que não somos o desenvolvedor desta extensão
 
@@ -128,6 +128,10 @@ A desativação do módulo pode ser usado para detectar se determinada ocorrênc
 --
 
 ## Perguntas mais frequentes "FAQ"
+
+### Sobre personalização
+
+O checkout IWD_Opc é de código aberto, entre em contato com o seu desenvolvedor para o mesmo efetuar as personalizações
 
 ### Permitir Checkout como Visitante
 
