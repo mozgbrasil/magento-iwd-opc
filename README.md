@@ -101,7 +101,7 @@ Você pode verificar se o módulo está instalado, indo ao backend em:
 
 ### Para atualizar o módulo execute o comando a seguir no terminal do seu servidor
 
-	composer clear-cache && composer update
+	composer update
 
 Na ocorrência de erro, renomeie a pasta /vendor/mozgbrasil e execute novamente
 
@@ -113,7 +113,7 @@ Para checar a data do módulo execute o seguinte comando
 
 ### Para [desinstalar][uninstall-mods] o módulo execute o comando a seguir no terminal do seu servidor
 
-	composer remove mozgbrasil/magento-iwd-opc && composer clear-cache && composer update
+	composer remove mozgbrasil/magento-iwd-opc
 
 --
 
